@@ -1,0 +1,124 @@
+SLICE/COUT0 GND  disp.SLICE_1
+     *** disp.SLICE_1/D1 is driven by constant or a pin on an incomplete path
+     *** disp.SLICE_1/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/D1 input disp.SLICE_6 has no outgoing device arc
+SLICE/CIN1 input disp.SLICE_6 has no outgoing device arc
+     ** disp.SLICE_6/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input disp.SLICE_6 is on an incomplete path
+SLICE/CIN0 input disp.SLICE_6 is on an incomplete path
+SLICE/D1 input disp.SLICE_4 has no outgoing device arc
+SLICE/CIN1 input disp.SLICE_4 has no outgoing device arc
+     ** disp.SLICE_4/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input disp.SLICE_4 is on an incomplete path
+SLICE/CIN0 input disp.SLICE_4 is on an incomplete path
+SLICE/COUT0 GND  disp.SLICE_9
+     *** disp.SLICE_9/D1 is driven by constant or a pin on an incomplete path
+     *** disp.SLICE_9/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/COUT0 GND  color.SLICE_14
+     *** color.SLICE_14/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_14/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/D1 input color.SLICE_16 has no outgoing device arc
+SLICE/CIN1 input color.SLICE_16 has no outgoing device arc
+     ** color.SLICE_16/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input color.SLICE_16 is on an incomplete path
+SLICE/B0 input color.SLICE_16 is on an incomplete path
+SLICE/CIN0 input color.SLICE_16 is on an incomplete path
+SLICE/COUT0 GND  color.SLICE_20
+     *** color.SLICE_20/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_20/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/CIN1 input color.SLICE_44 has no outgoing device arc
+SLICE/COUT0 GND  color.SLICE_45
+     *** color.SLICE_45/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_45/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/COUT0 GND  color.SLICE_42
+     *** color.SLICE_42/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_42/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/CIN1 input color.SLICE_48 has no outgoing device arc
+SLICE/D1 input color.SLICE_58 has no outgoing device arc
+SLICE/CIN1 input color.SLICE_58 has no outgoing device arc
+     ** color.SLICE_58/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input color.SLICE_58is connected to a constant net
+SLICE/B0 input color.SLICE_58 is on an incomplete path
+SLICE/CIN0 input color.SLICE_58 is on an incomplete path
+SLICE/D1 input color.SLICE_60 has no outgoing device arc
+SLICE/CIN1 input color.SLICE_60 has no outgoing device arc
+     ** color.SLICE_60/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input color.SLICE_60 is on an incomplete path
+SLICE/B0 input color.SLICE_60 is on an incomplete path
+SLICE/CIN0 input color.SLICE_60 is on an incomplete path
+SLICE/D1 input color.SLICE_68 has no outgoing device arc
+SLICE/CIN1 input color.SLICE_68 has no outgoing device arc
+     ** color.SLICE_68/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input color.SLICE_68 is on an incomplete path
+SLICE/CIN0 input color.SLICE_68 is on an incomplete path
+     ** color.SLICE_1047/F0 is driving a pin on an incomplete path
+SLICE/COUT0 GND  color.SLICE_65
+     *** color.SLICE_65/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_65/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/COUT0 GND  color.SLICE_73
+     *** color.SLICE_73/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_73/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/D1 input color.SLICE_79 has no outgoing device arc
+SLICE/CIN1 input color.SLICE_79 has no outgoing device arc
+     ** color.SLICE_79/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input color.SLICE_79is connected to a constant net
+SLICE/B0 input color.SLICE_79 is on an incomplete path
+SLICE/CIN0 input color.SLICE_79 is on an incomplete path
+SLICE/COUT0 GND  color.SLICE_87
+     *** color.SLICE_87/D1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_87/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/D1 input color.SLICE_88 has no outgoing device arc
+SLICE/CIN1 input color.SLICE_88 has no outgoing device arc
+     ** color.SLICE_88/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input color.SLICE_88 is on an incomplete path
+SLICE/CIN0 input color.SLICE_88 is on an incomplete path
+     ** color.SLICE_1348/F1 is driving a pin on an incomplete path
+SLICE/COUT0 GND  control.counter_inst.SLICE_97
+     *** control.counter_inst.SLICE_97/D1 is driven by constant or a pin on an incomplete path
+     *** control.counter_inst.SLICE_97/CIN1 is driven by constant or a pin on an incomplete path
+SLICE/D1 input control.counter_inst.SLICE_98 has no outgoing device arc
+SLICE/CIN1 input control.counter_inst.SLICE_98 has no outgoing device arc
+     ** control.counter_inst.SLICE_98/COUT0 is driving a pin on an incomplete path
+SLICE/C0 input control.counter_inst.SLICE_98 is on an incomplete path
+SLICE/CIN0 input control.counter_inst.SLICE_98 is on an incomplete path
+PLL/RESET_N input pll.lscc_pll_inst.u_PLL_Bis connected to a constant net
+PLL/INTFBOUT output  pll.lscc_pll_inst.u_PLL_B has no incoming device arc
+     *** pll.lscc_pll_inst.u_PLL_B/FEEDBACK is driven by constant or a pin on an incomplete path
+SLICE/D0 input color.SLICE_1047 is on an incomplete path
+SLICE/C0 input color.SLICE_1047 is on an incomplete path
+SLICE/B0 input color.SLICE_1047 is on an incomplete path
+SLICE/A0 input color.SLICE_1047 is on an incomplete path
+SLICE/F0 VCC  SLICE_1126
+     *** disp.SLICE_1/B1 is driven by constant or a pin on an incomplete path
+     *** disp.SLICE_9/B1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_13/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_14/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_20/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_41/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_42/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_45/B1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_48/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_48/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_50/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_50/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_54/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_55/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_57/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_59/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_59/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_65/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_66/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_73/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_86/C1 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_86/C0 is driven by constant or a pin on an incomplete path
+     *** color.SLICE_87/B1 is driven by constant or a pin on an incomplete path
+     *** control.counter_inst.SLICE_97/B1 is driven by constant or a pin on an incomplete path
+     *** color.mult_13/B2 is driven by constant or a pin on an incomplete path
+     *** color.mult_13/B0 is driven by constant or a pin on an incomplete path
+     *** color.mult_14/B2 is driven by constant or a pin on an incomplete path
+     *** color.mult_14/B0 is driven by constant or a pin on an incomplete path
+     *** control.clk_inst/CLKHFPU is driven by constant or a pin on an incomplete path
+     *** control.clk_inst/CLKHFEN is driven by constant or a pin on an incomplete path
+SLICE/D1 input color.SLICE_1348 is on an incomplete path
+SLICE/B1 input color.SLICE_1348 is on an incomplete path
+SLICE/A1 input color.SLICE_1348 is on an incomplete path

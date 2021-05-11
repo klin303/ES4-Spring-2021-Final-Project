@@ -1,0 +1,111 @@
+
+tmcheck -par "froggy_road_impl_1.par" 
+
+bitgen -w "froggy_road_impl_1.udb" -f "froggy_road_impl_1.t2b" 
+Loading froggy_road_impl_1.udb ...
+Loading device for application GENERIC from file 'itpa08.nph' in environment: C:/Program Files/lscc/radiant/2.2/ispfpga.
+Package Status:                     Preliminary    Version 1.5.
+Performance Hardware Data Status:   Advanced       Version 1.0.
+
+
+
+Design:  top
+Family:  iCE40UP
+Device:  iCE40UP5K
+Package: SG48
+Performance Grade:   High-Performance_1.2V
+WARNING - bitgen: Unable to find the instance/port 'acknowledge_in' in the constraint 'ldc_set_location -site {43} [get_ports acknowledge_in]'
+
+WARNING - bitgen: In the constraint 'ldc_set_location -site {43} [get_ports acknowledge_in]', the locate object is not specified
+
+Successfully loading udb from disks and to up-layer in CPU time: 0 secs , REAL time: 0 secs 
+
+
+
+BITGEN: Bitstream Generator Radiant Software (64-bit) 2.2.0.97.3
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+
+Running DRC.
+DRC detected 0 errors and 0 warnings.
+
+Preference Summary:
++---------------------------------+---------------------------------+
+|  Preference                     |  Current Setting                |
++---------------------------------+---------------------------------+
+ *  Default setting.
+ ** The specified setting matches the default setting.
+
+
+Creating bit map...
+Saving bit stream in "\\vs-home\klin04\es4\froggy_road\impl_1\froggy_road_impl_1.bin".
+Bitstream generation complete!
+
+Total CPU Time: 1 secs 
+Total REAL Time: 0 secs 
+Peak Memory Usage: 119 MB
+
+
+ibisgen "froggy_road_impl_1.udb" "C:/Program Files/lscc/radiant/2.2/cae_library/ibis/iCE40UP.ibs"
+IBIS Models Generator: Lattice Radiant Software (64-bit) 2.2.0.97.3
+
+Sat May  8 19:44:13 2021
+
+Loading froggy_road_impl_1.udb ...
+Loading device for application GENERIC from file 'itpa08.nph' in environment: C:/Program Files/lscc/radiant/2.2/ispfpga.
+Package Status:                     Preliminary    Version 1.5.
+Performance Hardware Data Status:   Advanced       Version 1.0.
+
+
+
+Design:  top
+Family:  iCE40UP
+Device:  iCE40UP5K
+Package: SG48
+Performance Grade:   High-Performance_1.2V
+    <postMsg mid="77001032" type="Warning" dynamic="2" navigation="0" arg0="acknowledge_in" arg1="ldc_set_location -site {43} [get_ports acknowledge_in]"  />
+    <postMsg mid="77001031" type="Warning" dynamic="1" navigation="0" arg0="ldc_set_location -site {43} [get_ports acknowledge_in]"  />
+Successfully loading udb from disks and to up-layer in CPU time: 0 secs , REAL time: 0 secs 
+
+Created design models.
+
+
+Generating: \\vs-home\klin04\es4\froggy_road\impl_1\IBIS\froggy_road_impl_1.ibs
+
+
+    <postMsg mid="1191031" type="Info" dynamic="0" navigation="0"  />
+
+backanno "froggy_road_impl_1.udb"  -o "froggy_road_impl_1_vo.vo"      -sp "High-Performance_1.2V"  -w -neg
+backanno: version Radiant Software (64-bit) 2.2.0.97.3
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+Loading froggy_road_impl_1.udb ...
+Loading device for application GENERIC from file 'itpa08.nph' in environment: C:/Program Files/lscc/radiant/2.2/ispfpga.
+Package Status:                     Preliminary    Version 1.5.
+Performance Hardware Data Status:   Advanced       Version 1.0.
+
+
+
+Design:  top
+Family:  iCE40UP
+Device:  iCE40UP5K
+Package: SG48
+Performance Grade:   High-Performance_1.2V
+    <postMsg mid="77001032" type="Warning" dynamic="2" navigation="0" arg0="acknowledge_in" arg1="ldc_set_location -site {43} [get_ports acknowledge_in]"  />
+    <postMsg mid="77001031" type="Warning" dynamic="1" navigation="0" arg0="ldc_set_location -site {43} [get_ports acknowledge_in]"  />
+Writing a verilog netlist based on the froggy_road_impl_1 design file.
+
+Writing Verilog netlist to file froggy_road_impl_1_vo.vo
+Writing SDF timing to file froggy_road_impl_1_vo.sdf
+Backanno finished with 0 posted error messages.
+Total CPU Time: 2 secs 
+Total REAL Time: 3 secs 
+Peak Memory Usage: 112 MB

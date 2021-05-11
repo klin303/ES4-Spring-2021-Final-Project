@@ -1,0 +1,7 @@
+-ver "C:/Program Files/lscc/radiant/2.2/ip/pmi/pmi_iCE40UP.v"
+-lib pmi -vhd "C:/Program Files/lscc/radiant/2.2/ip/pmi/pmi_iCE40UP.vhd"
+-ver "//vs-home/klin04/es4/froggy_road/pll_1/rtl/pll_1.v"
+-path "//vs-home/klin04/es4/froggy_road/pll_1"
+-vh2008
+-top pll_1
+-a "iCE40UP"

@@ -1,0 +1,53 @@
+-a "iCE40UP"
+-p iCE40UP5K
+-t SG48
+-sp "High-Performance_1.2V"
+
+-optimization_goal Area
+-bram_utilization 100
+-ramstyle Auto
+-romstyle auto
+-dsp_utilization 100
+-use_dsp 1
+-use_carry_chain 1
+-carry_chain_length 0
+
+-resource_sharing 1
+-propagate_constants 1
+-remove_duplicate_regs 1
+
+-max_fanout 1000
+-fsm_encoding_style Auto
+-twr_paths 3
+-fix_gated_clocks 1
+-loop_limit 1950
+
+
+
+
+-use_io_reg auto
+-vh2008
+
+-sethld
+
+
+-use_io_insertion 1
+-resolve_mixed_drivers 0
+-sdc "froggy_road_impl_1_cpe.ldc"
+-path "//vs-home/klin04/es4/froggy_road/pll_1"
+-path "C:/Program Files/lscc/radiant/2.2/ispfpga/ice40tp/data" "//vs-home/klin04/es4/froggy_road/impl_1" "//vs-home/klin04/es4/froggy_road"
+-ver "C:/Program Files/lscc/radiant/2.2/ip/pmi/pmi_iCE40UP.v"
+-lib pmi -vhd "C:/Program Files/lscc/radiant/2.2/ip/pmi/pmi_iCE40UP.vhd"
+-lib "work" -vhd "//vs-home/klin04/es4/froggy_road/source/impl_1/top_level.vhd"
+-ver "//vs-home/klin04/es4/froggy_road/pll_1/rtl/pll_1.v"
+-lib "work" -vhd "//vs-home/klin04/es4/froggy_road/source/impl_1/vga.vhd"
+"//vs-home/klin04/es4/froggy_road/source/impl_1/pattern_gen.vhd"
+"//vs-home/klin04/es4/froggy_road/source/impl_1/controller.vhd"
+"//vs-home/klin04/es4/froggy_road/source/impl_1/counter.vhd"
+
+
+-path "//vs-home/klin04/es4/froggy_road"
+-top top
+-udb "froggy_road_impl_1_rtl.udb"
+-output_hdl "froggy_road_impl_1.vm"
+

@@ -1,0 +1,26 @@
+<top name = "top"  library = "work"  arch = "RTL"  entry = "VHDL">
+
+<clocks>
+    <clockitem name = "clock_out"  type = "net" />
+    <clockitem name = "network_clock"  type = "net" />
+    <clockitem name = "fpga_clock"  type = "port" />
+    <clockitem name = "pll/lscc_pll_inst/outcoreb_o"  type = "net" />
+    <clockitem name = "pll/lscc_pll_inst/outglobalb_o"  type = "net" />
+    <clockitem name = "control/clk_wire"  type = "net" />
+    <clockitem name = "control/PS_clk"  type = "net" />
+    <clockitem name = "color/frog_clk_tmp"  type = "net" />
+    <clockitem name = "color/car_clock"  type = "net" />
+    <clockitem name = "pll/outcore_o"  type = "net" />
+</clocks>
+
+<!--
+    //=============================================================
+    //  Number of Clocks processed: 10
+    //
+    //  If a clock cannot be found in the top level pins section,
+    //  that means it is an internal clock.
+    //
+    //=============================================================
+-->
+
+</top>

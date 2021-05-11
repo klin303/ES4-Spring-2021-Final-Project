@@ -1,0 +1,2010 @@
+Lattice Timing Report -  Setup  and Hold, Version Radiant Software (64-bit) 2.2.0.97.3
+
+Sat May  8 19:43:30 2021
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+Command line:    timing -sethld -sp High-Performance_1.2V -hsp m -v 10 -u 10 -endpoints 10 -nperend 1 -html -rpt froggy_road_impl_1.tw1 froggy_road_impl_1_map.udb -gui
+
+-----------------------------------------
+Design:          top
+Family:          iCE40UP
+Device:          iCE40UP5K
+Package:         SG48
+Performance:     High-Performance_1.2V
+Package Status:                     Preliminary    Version 1.5
+Performance Hardware Data Status:   Advanced       Version 1.0 
+-----------------------------------------
+
+
+=====================================================================
+                    Table of Contents
+=====================================================================
+    1  DESIGN CHECKING
+        1.1  SDC Constraints
+        1.2  Combinational Loop
+    2  CLOCK SUMMARY
+        2.1  Clock network_clock
+        2.2  Clock control/clk_wire
+        2.3  Clock pll/lscc_pll_inst/fpga_clock_c
+    3  TIMING ANALYSIS SUMMARY
+        3.1  Overall (Setup and Hold)
+            3.1.1  Constraint Coverage
+            3.1.2  Timing Errors
+            3.1.3  Total Timing Score
+        3.2  Setup Summary Report
+        3.3  Hold Summary Report
+        3.4  Unconstrained Report
+            3.4.1  Unconstrained Start/End Points
+            3.4.2  Start/End Points Without Timing Constraints
+    4  DETAILED REPORT
+        4.1  Setup Detailed Report
+        4.2  Hold Detailed Report
+
+=====================================================================
+                    End of Table of Contents
+=====================================================================
+
+==============================================
+1  DESIGN CHECKING
+==============================================
+
+1.1  SDC Constraints
+=====================
+create_clock -name {control/clk_wire} -period 20.8333 [get_pins {control.clk_inst/CLKHF }] 
+create_generated_clock -name {network_clock} -source [get_pins {pll.lscc_pll_inst.u_PLL_B/REFERENCECLK}] -multiply_by 67 -divide_by 32 [get_pins {pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL }] 
+create_clock -name {pll/lscc_pll_inst/fpga_clock_c} -period 83.3333333333333 [get_nets fpga_clock_c]
+
+Operating conditions:
+--------------------
+    Temperature: 85
+
+1.2  Combinational Loop
+========================
+None
+
+==============================================
+2  CLOCK SUMMARY
+==============================================
+
+2.1 Clock "network_clock"
+=======================
+create_generated_clock -name {network_clock} -source [get_pins {pll.lscc_pll_inst.u_PLL_B/REFERENCECLK}] -multiply_by 67 -divide_by 32 [get_pins {pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL }] 
+
+Single Clock Domain
+-------------------------------------------------------------------------------------------------------
+          Clock network_clock           |                    |       Period       |     Frequency      
+-------------------------------------------------------------------------------------------------------
+ From network_clock                     |             Target |          39.801 ns |         25.125 MHz 
+                                        | Actual (all paths) |          27.460 ns |         36.417 MHz 
+-------------------------------------------------------------------------------------------------------
+
+Clock Domain Crossing
+------------------------------------------------------------------------------------------------------
+          Clock network_clock           |   Worst Time Between Edges   |           Comment            
+------------------------------------------------------------------------------------------------------
+ From control/clk_wire                  |                         ---- |                      No path 
+ From pll/lscc_pll_inst/fpga_clock_c    |                         ---- |                      No path 
+------------------------------------------------------------------------------------------------------
+
+2.2 Clock "control/clk_wire"
+=======================
+create_clock -name {control/clk_wire} -period 20.8333 [get_pins {control.clk_inst/CLKHF }] 
+
+Single Clock Domain
+-------------------------------------------------------------------------------------------------------
+         Clock control/clk_wire         |                    |       Period       |     Frequency      
+-------------------------------------------------------------------------------------------------------
+ From control/clk_wire                  |             Target |          20.833 ns |         48.000 MHz 
+                                        | Actual (all paths) |          36.871 ns |         27.122 MHz 
+control.clk_inst/CLKHF (MPW)            |   (50% duty cycle) |          20.830 ns |         48.008 MHz 
+-------------------------------------------------------------------------------------------------------
+
+Clock Domain Crossing
+------------------------------------------------------------------------------------------------------
+         Clock control/clk_wire         |   Worst Time Between Edges   |           Comment            
+------------------------------------------------------------------------------------------------------
+ From network_clock                     |                         ---- |                      No path 
+ From pll/lscc_pll_inst/fpga_clock_c    |                         ---- |                      No path 
+------------------------------------------------------------------------------------------------------
+
+2.3 Clock "pll/lscc_pll_inst/fpga_clock_c"
+=======================
+create_clock -name {pll/lscc_pll_inst/fpga_clock_c} -period 83.3333333333333 [get_nets fpga_clock_c]
+
+Single Clock Domain
+-------------------------------------------------------------------------------------------------------
+  Clock pll/lscc_pll_inst/fpga_clock_c  |                    |       Period       |     Frequency      
+-------------------------------------------------------------------------------------------------------
+ From pll/lscc_pll_inst/fpga_clock_c    |             Target |          83.333 ns |         12.000 MHz 
+                                        | Actual (all paths) |          97.089 ns |         10.300 MHz 
+-------------------------------------------------------------------------------------------------------
+
+Clock Domain Crossing
+------------------------------------------------------------------------------------------------------
+  Clock pll/lscc_pll_inst/fpga_clock_c  |   Worst Time Between Edges   |           Comment            
+------------------------------------------------------------------------------------------------------
+ From network_clock                     |                         ---- |                      No path 
+ From control/clk_wire                  |                         ---- |                      No path 
+------------------------------------------------------------------------------------------------------
+
+==============================================
+3  TIMING ANALYSIS SUMMARY
+==============================================
+
+3.1  Overall (Setup and Hold)
+==============================
+
+3.1.1  Constraint Coverage
+---------------------------
+Constraint Coverage: 14.7736%
+
+3.1.2  Timing Errors
+---------------------
+Timing Errors: 18 endpoints (setup), 0 endpoints (hold)
+
+3.1.3  Total Timing Score
+--------------------------
+Total Negative Slack: 142.596 ns (setup), 0.000 ns (hold)
+
+3.2  Setup Summary Report
+==========================
+
+-------------------------------------------------------
+          Listing 10 End Points          |    Slack    
+-------------------------------------------------------
+control/counter_inst/counter_value_426__i14/D              
+                                         |  -16.039 ns 
+color/frog_clk_counter_i31_596__i31/D    |  -13.757 ns 
+control/counter_inst/counter_value_426__i13/D              
+                                         |  -13.686 ns 
+color/frog_clk_counter_i31_596__i30/D    |  -11.404 ns 
+control/counter_inst/counter_value_426__i12/D              
+                                         |  -11.333 ns 
+color/car_clk_counter_i31_597__i31/D     |  -11.205 ns 
+color/frog_clk_counter_i31_596__i29/D    |   -9.051 ns 
+control/counter_inst/counter_value_426__i11/D              
+                                         |   -8.980 ns 
+color/car_clk_counter_i31_597__i30/D     |   -8.852 ns 
+color/frog_clk_counter_i31_596__i28/D    |   -6.698 ns 
+-------------------------------------------------------
+                                         |             
+Setup # of endpoints with negative slack:|          18 
+                                         |             
+-------------------------------------------------------
+
+3.3  Hold Summary Report
+=========================
+
+-------------------------------------------------------
+          Listing 10 End Points          |    Slack    
+-------------------------------------------------------
+disp/row_count_423__i9/SP                |    5.167 ns 
+{disp/row_count_423__i7/SP   disp/row_count_423__i8/SP}              
+                                         |    5.167 ns 
+disp/row_count_423__i7/D                 |    5.167 ns 
+disp/row_count_423__i8/D                 |    5.167 ns 
+disp/col_count_424__i1/D                 |    5.167 ns 
+disp/col_count_424__i2/D                 |    5.167 ns 
+disp/col_count_424__i0/D                 |    5.167 ns 
+{disp/row_count_423__i1/SP   disp/row_count_423__i2/SP}              
+                                         |    5.167 ns 
+disp/row_count_423__i1/D                 |    5.167 ns 
+disp/row_count_423__i2/D                 |    5.167 ns 
+-------------------------------------------------------
+                                         |             
+Hold # of endpoints with negative slack: |           0 
+                                         |             
+-------------------------------------------------------
+
+3.4  Unconstrained Report
+===========================
+
+3.4.1  Unconstrained Start/End Points
+--------------------------------------
+
+Clocked but unconstrained timing start points
+-------------------------------------------------------------------
+         Listing 2 Start Points         |           Type           
+-------------------------------------------------------------------
+control/counter_inst/counter_value_426__i14/Q                           
+                                        |          No required time
+color/is_menu_c/Q                       |          No required time
+-------------------------------------------------------------------
+                                        |                          
+Number of unconstrained timing start po |                          
+ints                                    |                         2
+                                        |                          
+-------------------------------------------------------------------
+
+Clocked but unconstrained timing end points
+--------------------------------------------------
+There is no end point satisfying reporting criteria
+
+
+3.4.2  Start/End Points Without Timing Constraints
+---------------------------------------------------
+
+I/O ports without constraint
+----------------------------
+Possible constraints to use on I/O ports are:
+set_input_delay,
+set_output_delay,
+set_max_delay,
+create_clock,
+create_generated_clock,
+...
+
+-------------------------------------------------------------------
+     Listing 10 Start or End Points     |           Type           
+-------------------------------------------------------------------
+acknowledge_in                          |                     input
+rgb[2]                                  |                    output
+rgb[3]                                  |                    output
+rgb[4]                                  |                    output
+hsync                                   |                    output
+vsync                                   |                    output
+command_out                             |                    output
+attention_out                           |                    output
+clock_out                               |                    output
+rgb[0]                                  |                    output
+-------------------------------------------------------------------
+                                        |                          
+Number of I/O ports without constraint  |                        12
+                                        |                          
+-------------------------------------------------------------------
+
+Registers without clock definition
+Define the clock for these registers.
+-------------------------------------------------------------------
+         Listing 10 Instance(s)         |           Type           
+-------------------------------------------------------------------
+color/frog_col_i2                       |                  No Clock
+color/frog_col_i0                       |                  No Clock
+color/frog_row_i9                       |                  No Clock
+color/frog_row_i8                       |                  No Clock
+color/temp_board[1]_i31                 |                  No Clock
+color/temp_board[3]_i31                 |                  No Clock
+color/temp_board[2]_i31                 |                  No Clock
+color/frog_col_i9                       |                  No Clock
+color/frog_col_i8                       |                  No Clock
+color/frog_col_i4                       |                  No Clock
+-------------------------------------------------------------------
+                                        |                          
+Number of registers without clock defin |                          
+ition                                   |                      2078
+                                        |                          
+-------------------------------------------------------------------
+
+==============================================
+4  DETAILED REPORT
+==============================================
+
+4.1  Setup Detailed Report
+===========================
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Detail report of critical paths
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+                    Detailed Report for timing paths 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : control/counter_inst/counter_value_426__i1/Q  (SLICE)
+Path End         : control/counter_inst/counter_value_426__i14/D  (SLICE)
+Source Clock     : control/clk_wire (R)
+Destination Clock: control/clk_wire (R)
+Logic Level      : 15
+Delay Ratio      : 84.9% (route), 15.1% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 20.833 ns 
+Path Slack       : -16.038 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000         0.000  8       
+control/counter_inst/clk_wire                             NET DELAY      2.075         2.075  1       
+
+
+
+control/counter_inst/counter_value_426__i1/CK->control/counter_inst/counter_value_426__i1/Q
+                                          SLICE           CLK_TO_Q1_DELAY      1.391         3.466  1       
+control/counter_inst/n14                                  NET DELAY            2.075         5.541  1       
+control/counter_inst/counter_value_426_add_4_1/C1->control/counter_inst/counter_value_426_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344         5.885  2       
+control/counter_inst/n6173                                NET DELAY            2.075         7.960  1       
+control/counter_inst/counter_value_426_add_4_3/CI0->control/counter_inst/counter_value_426_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278         8.238  2       
+control/counter_inst/n12377                               NET DELAY            2.075        10.313  1       
+control/counter_inst/counter_value_426_add_4_3/CI1->control/counter_inst/counter_value_426_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        10.591  2       
+control/counter_inst/n6175                                NET DELAY            2.075        12.666  1       
+control/counter_inst/counter_value_426_add_4_5/CI0->control/counter_inst/counter_value_426_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        12.944  2       
+control/counter_inst/n12380                               NET DELAY            2.075        15.019  1       
+control/counter_inst/counter_value_426_add_4_5/CI1->control/counter_inst/counter_value_426_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        15.297  2       
+control/counter_inst/n6177                                NET DELAY            2.075        17.372  1       
+control/counter_inst/counter_value_426_add_4_7/CI0->control/counter_inst/counter_value_426_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        17.650  2       
+control/counter_inst/n12383                               NET DELAY            2.075        19.725  1       
+control/counter_inst/counter_value_426_add_4_7/CI1->control/counter_inst/counter_value_426_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        20.003  2       
+control/counter_inst/n6179                                NET DELAY            2.075        22.078  1       
+control/counter_inst/counter_value_426_add_4_9/CI0->control/counter_inst/counter_value_426_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        22.356  2       
+control/counter_inst/n12386                               NET DELAY            2.075        24.431  1       
+control/counter_inst/counter_value_426_add_4_9/CI1->control/counter_inst/counter_value_426_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        24.709  2       
+control/counter_inst/n6181                                NET DELAY            2.075        26.784  1       
+control/counter_inst/counter_value_426_add_4_11/CI0->control/counter_inst/counter_value_426_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        27.062  2       
+control/counter_inst/n12389                               NET DELAY            2.075        29.137  1       
+control/counter_inst/counter_value_426_add_4_11/CI1->control/counter_inst/counter_value_426_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        29.415  2       
+control/counter_inst/n6183                                NET DELAY            2.075        31.490  1       
+control/counter_inst/counter_value_426_add_4_13/CI0->control/counter_inst/counter_value_426_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        31.768  2       
+control/counter_inst/n12392                               NET DELAY            2.075        33.843  1       
+control/counter_inst/counter_value_426_add_4_13/CI1->control/counter_inst/counter_value_426_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        34.121  2       
+control/counter_inst/n6185                                NET DELAY            2.075        36.196  1       
+control/counter_inst/counter_value_426_add_4_15/D0->control/counter_inst/counter_value_426_add_4_15/S0
+                                          SLICE           D0_TO_F0_DELAY       0.477        36.673  1       
+control/counter_inst/n61[13] ( DI0 )                      NET DELAY            2.075        38.748  1       
+
+
+                                                          CONSTRAINT     0.000        20.833  1       
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000        20.833  8       
+control/counter_inst/clk_wire ( CLK )                     NET DELAY      2.075        22.908  1       
+                                                          Uncertainty    0.000        22.908  
+                                                          Setup time     0.199        22.709  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         22.709  
+Arrival Time                                                                         -38.747  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                 -16.038  
+
+
+
+
+++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : color/frog_clk_counter_i31_596__i27/Q  (SLICE)
+Path End         : color/frog_clk_counter_i31_596__i31/D  (SLICE)
+Source Clock     : pll/lscc_pll_inst/fpga_clock_c (R)
+Destination Clock: pll/lscc_pll_inst/fpga_clock_c (R)
+Logic Level      : 40
+Delay Ratio      : 85.7% (route), 14.3% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 83.333 ns 
+Path Slack       : -13.756 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+
+
+
+color/frog_clk_counter_i31_596__i27/CK->color/frog_clk_counter_i31_596__i27/Q
+                                          SLICE           CLK_TO_Q0_DELAY      1.391         3.466  2       
+color/frog_clk_counter_31__N_108[27]                      NET DELAY            2.075         5.541  1       
+color/i14_4_lut/A->color/i14_4_lut/Z      SLICE           A0_TO_F0_DELAY       0.477         6.018  1       
+color/n36_adj_983                                         NET DELAY            2.075         8.093  1       
+color/i18_4_lut/B->color/i18_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477         8.570  1       
+color/n40_adj_982                                         NET DELAY            2.075        10.645  1       
+color/i20_4_lut/B->color/i20_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477        11.122  1       
+color/n42_adj_969                                         NET DELAY            2.075        13.197  1       
+color/i1_4_lut/C->color/i1_4_lut/Z        SLICE           C0_TO_F0_DELAY       0.477        13.674  2       
+color/n10_adj_957                                         NET DELAY            2.075        15.749  1       
+color/i5_2_lut/B->color/i5_2_lut/Z        SLICE           B0_TO_F0_DELAY       0.477        16.226  2       
+color/n14_adj_958                                         NET DELAY            2.075        18.301  1       
+color/i8_4_lut_adj_533/C->color/i8_4_lut_adj_533/Z
+                                          SLICE           C0_TO_F0_DELAY       0.477        18.778  29      
+color/n8034                                               NET DELAY            2.075        20.853  1       
+color/i2475_2_lut_4_lut/B->color/i2475_2_lut_4_lut/Z
+                                          SLICE           B0_TO_F0_DELAY       0.477        21.330  1       
+color/n166[0]                                             NET DELAY            2.075        23.405  1       
+color/frog_clk_counter_i31_596_add_4_1/C1->color/frog_clk_counter_i31_596_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344        23.749  2       
+color/n6280                                               NET DELAY            2.075        25.824  1       
+color/frog_clk_counter_i31_596_add_4_3/CI0->color/frog_clk_counter_i31_596_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        26.102  2       
+color/n12626                                              NET DELAY            2.075        28.177  1       
+color/frog_clk_counter_i31_596_add_4_3/CI1->color/frog_clk_counter_i31_596_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        28.455  2       
+color/n6282                                               NET DELAY            2.075        30.530  1       
+color/frog_clk_counter_i31_596_add_4_5/CI0->color/frog_clk_counter_i31_596_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        30.808  2       
+color/n12629                                              NET DELAY            2.075        32.883  1       
+color/frog_clk_counter_i31_596_add_4_5/CI1->color/frog_clk_counter_i31_596_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        33.161  2       
+color/n6284                                               NET DELAY            2.075        35.236  1       
+color/frog_clk_counter_i31_596_add_4_7/CI0->color/frog_clk_counter_i31_596_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        35.514  2       
+color/n12632                                              NET DELAY            2.075        37.589  1       
+color/frog_clk_counter_i31_596_add_4_7/CI1->color/frog_clk_counter_i31_596_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        37.867  2       
+color/n6286                                               NET DELAY            2.075        39.942  1       
+color/frog_clk_counter_i31_596_add_4_9/CI0->color/frog_clk_counter_i31_596_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        40.220  2       
+color/n12635                                              NET DELAY            2.075        42.295  1       
+color/frog_clk_counter_i31_596_add_4_9/CI1->color/frog_clk_counter_i31_596_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        42.573  2       
+color/n6288                                               NET DELAY            2.075        44.648  1       
+color/frog_clk_counter_i31_596_add_4_11/CI0->color/frog_clk_counter_i31_596_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        44.926  2       
+color/n12638                                              NET DELAY            2.075        47.001  1       
+color/frog_clk_counter_i31_596_add_4_11/CI1->color/frog_clk_counter_i31_596_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        47.279  2       
+color/n6290                                               NET DELAY            2.075        49.354  1       
+color/frog_clk_counter_i31_596_add_4_13/CI0->color/frog_clk_counter_i31_596_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        49.632  2       
+color/n12641                                              NET DELAY            2.075        51.707  1       
+color/frog_clk_counter_i31_596_add_4_13/CI1->color/frog_clk_counter_i31_596_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        51.985  2       
+color/n6292                                               NET DELAY            2.075        54.060  1       
+color/frog_clk_counter_i31_596_add_4_15/CI0->color/frog_clk_counter_i31_596_add_4_15/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        54.338  2       
+color/n12644                                              NET DELAY            2.075        56.413  1       
+color/frog_clk_counter_i31_596_add_4_15/CI1->color/frog_clk_counter_i31_596_add_4_15/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        56.691  2       
+color/n6294                                               NET DELAY            2.075        58.766  1       
+color/frog_clk_counter_i31_596_add_4_17/CI0->color/frog_clk_counter_i31_596_add_4_17/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        59.044  2       
+color/n12647                                              NET DELAY            2.075        61.119  1       
+color/frog_clk_counter_i31_596_add_4_17/CI1->color/frog_clk_counter_i31_596_add_4_17/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        61.397  2       
+color/n6296                                               NET DELAY            2.075        63.472  1       
+color/frog_clk_counter_i31_596_add_4_19/CI0->color/frog_clk_counter_i31_596_add_4_19/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        63.750  2       
+color/n12650                                              NET DELAY            2.075        65.825  1       
+color/frog_clk_counter_i31_596_add_4_19/CI1->color/frog_clk_counter_i31_596_add_4_19/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        66.103  2       
+color/n6298                                               NET DELAY            2.075        68.178  1       
+color/frog_clk_counter_i31_596_add_4_21/CI0->color/frog_clk_counter_i31_596_add_4_21/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        68.456  2       
+color/n12653                                              NET DELAY            2.075        70.531  1       
+color/frog_clk_counter_i31_596_add_4_21/CI1->color/frog_clk_counter_i31_596_add_4_21/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        70.809  2       
+color/n6300                                               NET DELAY            2.075        72.884  1       
+color/frog_clk_counter_i31_596_add_4_23/CI0->color/frog_clk_counter_i31_596_add_4_23/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        73.162  2       
+color/n12656                                              NET DELAY            2.075        75.237  1       
+color/frog_clk_counter_i31_596_add_4_23/CI1->color/frog_clk_counter_i31_596_add_4_23/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        75.515  2       
+color/n6302                                               NET DELAY            2.075        77.590  1       
+color/frog_clk_counter_i31_596_add_4_25/CI0->color/frog_clk_counter_i31_596_add_4_25/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        77.868  2       
+color/n12659                                              NET DELAY            2.075        79.943  1       
+color/frog_clk_counter_i31_596_add_4_25/CI1->color/frog_clk_counter_i31_596_add_4_25/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        80.221  2       
+color/n6304                                               NET DELAY            2.075        82.296  1       
+color/frog_clk_counter_i31_596_add_4_27/CI0->color/frog_clk_counter_i31_596_add_4_27/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        82.574  2       
+color/n12662                                              NET DELAY            2.075        84.649  1       
+color/frog_clk_counter_i31_596_add_4_27/CI1->color/frog_clk_counter_i31_596_add_4_27/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        84.927  2       
+color/n6306                                               NET DELAY            2.075        87.002  1       
+color/frog_clk_counter_i31_596_add_4_29/CI0->color/frog_clk_counter_i31_596_add_4_29/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        87.280  2       
+color/n12665                                              NET DELAY            2.075        89.355  1       
+color/frog_clk_counter_i31_596_add_4_29/CI1->color/frog_clk_counter_i31_596_add_4_29/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        89.633  2       
+color/n6308                                               NET DELAY            2.075        91.708  1       
+color/frog_clk_counter_i31_596_add_4_31/CI0->color/frog_clk_counter_i31_596_add_4_31/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        91.986  2       
+color/n12668                                              NET DELAY            2.075        94.061  1       
+color/frog_clk_counter_i31_596_add_4_31/CI1->color/frog_clk_counter_i31_596_add_4_31/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        94.339  2       
+color/n6310                                               NET DELAY            2.075        96.414  1       
+color/frog_clk_counter_i31_596_add_4_33/D0->color/frog_clk_counter_i31_596_add_4_33/S0
+                                          SLICE           D0_TO_F0_DELAY       0.477        96.891  1       
+color/n133_adj_1357[31] ( DI0 )                           NET DELAY            2.075        98.966  1       
+
+
+                                                          CONSTRAINT     0.000        83.333  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000        83.333  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075        85.408  1       
+                                                          Uncertainty    0.000        85.408  
+                                                          Setup time     0.199        85.209  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         85.209  
+Arrival Time                                                                         -98.966  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                 -13.756  
+
+
+
+
+++++ Path 3 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : control/counter_inst/counter_value_426__i1/Q  (SLICE)
+Path End         : control/counter_inst/counter_value_426__i13/D  (SLICE)
+Source Clock     : control/clk_wire (R)
+Destination Clock: control/clk_wire (R)
+Logic Level      : 14
+Delay Ratio      : 84.6% (route), 15.4% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 20.833 ns 
+Path Slack       : -13.685 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000         0.000  8       
+control/counter_inst/clk_wire                             NET DELAY      2.075         2.075  1       
+
+
+
+control/counter_inst/counter_value_426__i1/CK->control/counter_inst/counter_value_426__i1/Q
+                                          SLICE           CLK_TO_Q1_DELAY      1.391         3.466  1       
+control/counter_inst/n14                                  NET DELAY            2.075         5.541  1       
+control/counter_inst/counter_value_426_add_4_1/C1->control/counter_inst/counter_value_426_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344         5.885  2       
+control/counter_inst/n6173                                NET DELAY            2.075         7.960  1       
+control/counter_inst/counter_value_426_add_4_3/CI0->control/counter_inst/counter_value_426_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278         8.238  2       
+control/counter_inst/n12377                               NET DELAY            2.075        10.313  1       
+control/counter_inst/counter_value_426_add_4_3/CI1->control/counter_inst/counter_value_426_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        10.591  2       
+control/counter_inst/n6175                                NET DELAY            2.075        12.666  1       
+control/counter_inst/counter_value_426_add_4_5/CI0->control/counter_inst/counter_value_426_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        12.944  2       
+control/counter_inst/n12380                               NET DELAY            2.075        15.019  1       
+control/counter_inst/counter_value_426_add_4_5/CI1->control/counter_inst/counter_value_426_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        15.297  2       
+control/counter_inst/n6177                                NET DELAY            2.075        17.372  1       
+control/counter_inst/counter_value_426_add_4_7/CI0->control/counter_inst/counter_value_426_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        17.650  2       
+control/counter_inst/n12383                               NET DELAY            2.075        19.725  1       
+control/counter_inst/counter_value_426_add_4_7/CI1->control/counter_inst/counter_value_426_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        20.003  2       
+control/counter_inst/n6179                                NET DELAY            2.075        22.078  1       
+control/counter_inst/counter_value_426_add_4_9/CI0->control/counter_inst/counter_value_426_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        22.356  2       
+control/counter_inst/n12386                               NET DELAY            2.075        24.431  1       
+control/counter_inst/counter_value_426_add_4_9/CI1->control/counter_inst/counter_value_426_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        24.709  2       
+control/counter_inst/n6181                                NET DELAY            2.075        26.784  1       
+control/counter_inst/counter_value_426_add_4_11/CI0->control/counter_inst/counter_value_426_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        27.062  2       
+control/counter_inst/n12389                               NET DELAY            2.075        29.137  1       
+control/counter_inst/counter_value_426_add_4_11/CI1->control/counter_inst/counter_value_426_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        29.415  2       
+control/counter_inst/n6183                                NET DELAY            2.075        31.490  1       
+control/counter_inst/counter_value_426_add_4_13/CI0->control/counter_inst/counter_value_426_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        31.768  2       
+control/counter_inst/n12392                               NET DELAY            2.075        33.843  1       
+control/counter_inst/counter_value_426_add_4_13/D1->control/counter_inst/counter_value_426_add_4_13/S1
+                                          SLICE           D1_TO_F1_DELAY       0.477        34.320  1       
+control/counter_inst/n61[12] ( DI1 )                      NET DELAY            2.075        36.395  1       
+
+
+                                                          CONSTRAINT     0.000        20.833  1       
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000        20.833  8       
+control/counter_inst/clk_wire ( CLK )                     NET DELAY      2.075        22.908  1       
+                                                          Uncertainty    0.000        22.908  
+                                                          Setup time     0.199        22.709  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         22.709  
+Arrival Time                                                                         -36.394  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                 -13.685  
+
+
+
+
+++++ Path 4 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : color/frog_clk_counter_i31_596__i27/Q  (SLICE)
+Path End         : color/frog_clk_counter_i31_596__i30/D  (SLICE)
+Source Clock     : pll/lscc_pll_inst/fpga_clock_c (R)
+Destination Clock: pll/lscc_pll_inst/fpga_clock_c (R)
+Logic Level      : 39
+Delay Ratio      : 85.6% (route), 14.4% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 83.333 ns 
+Path Slack       : -11.403 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+
+
+
+color/frog_clk_counter_i31_596__i27/CK->color/frog_clk_counter_i31_596__i27/Q
+                                          SLICE           CLK_TO_Q0_DELAY      1.391         3.466  2       
+color/frog_clk_counter_31__N_108[27]                      NET DELAY            2.075         5.541  1       
+color/i14_4_lut/A->color/i14_4_lut/Z      SLICE           A0_TO_F0_DELAY       0.477         6.018  1       
+color/n36_adj_983                                         NET DELAY            2.075         8.093  1       
+color/i18_4_lut/B->color/i18_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477         8.570  1       
+color/n40_adj_982                                         NET DELAY            2.075        10.645  1       
+color/i20_4_lut/B->color/i20_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477        11.122  1       
+color/n42_adj_969                                         NET DELAY            2.075        13.197  1       
+color/i1_4_lut/C->color/i1_4_lut/Z        SLICE           C0_TO_F0_DELAY       0.477        13.674  2       
+color/n10_adj_957                                         NET DELAY            2.075        15.749  1       
+color/i5_2_lut/B->color/i5_2_lut/Z        SLICE           B0_TO_F0_DELAY       0.477        16.226  2       
+color/n14_adj_958                                         NET DELAY            2.075        18.301  1       
+color/i8_4_lut_adj_533/C->color/i8_4_lut_adj_533/Z
+                                          SLICE           C0_TO_F0_DELAY       0.477        18.778  29      
+color/n8034                                               NET DELAY            2.075        20.853  1       
+color/i2475_2_lut_4_lut/B->color/i2475_2_lut_4_lut/Z
+                                          SLICE           B0_TO_F0_DELAY       0.477        21.330  1       
+color/n166[0]                                             NET DELAY            2.075        23.405  1       
+color/frog_clk_counter_i31_596_add_4_1/C1->color/frog_clk_counter_i31_596_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344        23.749  2       
+color/n6280                                               NET DELAY            2.075        25.824  1       
+color/frog_clk_counter_i31_596_add_4_3/CI0->color/frog_clk_counter_i31_596_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        26.102  2       
+color/n12626                                              NET DELAY            2.075        28.177  1       
+color/frog_clk_counter_i31_596_add_4_3/CI1->color/frog_clk_counter_i31_596_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        28.455  2       
+color/n6282                                               NET DELAY            2.075        30.530  1       
+color/frog_clk_counter_i31_596_add_4_5/CI0->color/frog_clk_counter_i31_596_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        30.808  2       
+color/n12629                                              NET DELAY            2.075        32.883  1       
+color/frog_clk_counter_i31_596_add_4_5/CI1->color/frog_clk_counter_i31_596_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        33.161  2       
+color/n6284                                               NET DELAY            2.075        35.236  1       
+color/frog_clk_counter_i31_596_add_4_7/CI0->color/frog_clk_counter_i31_596_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        35.514  2       
+color/n12632                                              NET DELAY            2.075        37.589  1       
+color/frog_clk_counter_i31_596_add_4_7/CI1->color/frog_clk_counter_i31_596_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        37.867  2       
+color/n6286                                               NET DELAY            2.075        39.942  1       
+color/frog_clk_counter_i31_596_add_4_9/CI0->color/frog_clk_counter_i31_596_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        40.220  2       
+color/n12635                                              NET DELAY            2.075        42.295  1       
+color/frog_clk_counter_i31_596_add_4_9/CI1->color/frog_clk_counter_i31_596_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        42.573  2       
+color/n6288                                               NET DELAY            2.075        44.648  1       
+color/frog_clk_counter_i31_596_add_4_11/CI0->color/frog_clk_counter_i31_596_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        44.926  2       
+color/n12638                                              NET DELAY            2.075        47.001  1       
+color/frog_clk_counter_i31_596_add_4_11/CI1->color/frog_clk_counter_i31_596_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        47.279  2       
+color/n6290                                               NET DELAY            2.075        49.354  1       
+color/frog_clk_counter_i31_596_add_4_13/CI0->color/frog_clk_counter_i31_596_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        49.632  2       
+color/n12641                                              NET DELAY            2.075        51.707  1       
+color/frog_clk_counter_i31_596_add_4_13/CI1->color/frog_clk_counter_i31_596_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        51.985  2       
+color/n6292                                               NET DELAY            2.075        54.060  1       
+color/frog_clk_counter_i31_596_add_4_15/CI0->color/frog_clk_counter_i31_596_add_4_15/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        54.338  2       
+color/n12644                                              NET DELAY            2.075        56.413  1       
+color/frog_clk_counter_i31_596_add_4_15/CI1->color/frog_clk_counter_i31_596_add_4_15/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        56.691  2       
+color/n6294                                               NET DELAY            2.075        58.766  1       
+color/frog_clk_counter_i31_596_add_4_17/CI0->color/frog_clk_counter_i31_596_add_4_17/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        59.044  2       
+color/n12647                                              NET DELAY            2.075        61.119  1       
+color/frog_clk_counter_i31_596_add_4_17/CI1->color/frog_clk_counter_i31_596_add_4_17/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        61.397  2       
+color/n6296                                               NET DELAY            2.075        63.472  1       
+color/frog_clk_counter_i31_596_add_4_19/CI0->color/frog_clk_counter_i31_596_add_4_19/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        63.750  2       
+color/n12650                                              NET DELAY            2.075        65.825  1       
+color/frog_clk_counter_i31_596_add_4_19/CI1->color/frog_clk_counter_i31_596_add_4_19/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        66.103  2       
+color/n6298                                               NET DELAY            2.075        68.178  1       
+color/frog_clk_counter_i31_596_add_4_21/CI0->color/frog_clk_counter_i31_596_add_4_21/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        68.456  2       
+color/n12653                                              NET DELAY            2.075        70.531  1       
+color/frog_clk_counter_i31_596_add_4_21/CI1->color/frog_clk_counter_i31_596_add_4_21/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        70.809  2       
+color/n6300                                               NET DELAY            2.075        72.884  1       
+color/frog_clk_counter_i31_596_add_4_23/CI0->color/frog_clk_counter_i31_596_add_4_23/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        73.162  2       
+color/n12656                                              NET DELAY            2.075        75.237  1       
+color/frog_clk_counter_i31_596_add_4_23/CI1->color/frog_clk_counter_i31_596_add_4_23/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        75.515  2       
+color/n6302                                               NET DELAY            2.075        77.590  1       
+color/frog_clk_counter_i31_596_add_4_25/CI0->color/frog_clk_counter_i31_596_add_4_25/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        77.868  2       
+color/n12659                                              NET DELAY            2.075        79.943  1       
+color/frog_clk_counter_i31_596_add_4_25/CI1->color/frog_clk_counter_i31_596_add_4_25/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        80.221  2       
+color/n6304                                               NET DELAY            2.075        82.296  1       
+color/frog_clk_counter_i31_596_add_4_27/CI0->color/frog_clk_counter_i31_596_add_4_27/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        82.574  2       
+color/n12662                                              NET DELAY            2.075        84.649  1       
+color/frog_clk_counter_i31_596_add_4_27/CI1->color/frog_clk_counter_i31_596_add_4_27/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        84.927  2       
+color/n6306                                               NET DELAY            2.075        87.002  1       
+color/frog_clk_counter_i31_596_add_4_29/CI0->color/frog_clk_counter_i31_596_add_4_29/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        87.280  2       
+color/n12665                                              NET DELAY            2.075        89.355  1       
+color/frog_clk_counter_i31_596_add_4_29/CI1->color/frog_clk_counter_i31_596_add_4_29/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        89.633  2       
+color/n6308                                               NET DELAY            2.075        91.708  1       
+color/frog_clk_counter_i31_596_add_4_31/CI0->color/frog_clk_counter_i31_596_add_4_31/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        91.986  2       
+color/n12668                                              NET DELAY            2.075        94.061  1       
+color/frog_clk_counter_i31_596_add_4_31/D1->color/frog_clk_counter_i31_596_add_4_31/S1
+                                          SLICE           D1_TO_F1_DELAY       0.477        94.538  1       
+color/n133_adj_1357[30] ( DI1 )                           NET DELAY            2.075        96.613  1       
+
+
+                                                          CONSTRAINT     0.000        83.333  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000        83.333  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075        85.408  1       
+                                                          Uncertainty    0.000        85.408  
+                                                          Setup time     0.199        85.209  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         85.209  
+Arrival Time                                                                         -96.613  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                 -11.403  
+
+
+
+
+++++ Path 5 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : control/counter_inst/counter_value_426__i1/Q  (SLICE)
+Path End         : control/counter_inst/counter_value_426__i12/D  (SLICE)
+Source Clock     : control/clk_wire (R)
+Destination Clock: control/clk_wire (R)
+Logic Level      : 13
+Delay Ratio      : 84.4% (route), 15.6% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 20.833 ns 
+Path Slack       : -11.332 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000         0.000  8       
+control/counter_inst/clk_wire                             NET DELAY      2.075         2.075  1       
+
+
+
+control/counter_inst/counter_value_426__i1/CK->control/counter_inst/counter_value_426__i1/Q
+                                          SLICE           CLK_TO_Q1_DELAY      1.391         3.466  1       
+control/counter_inst/n14                                  NET DELAY            2.075         5.541  1       
+control/counter_inst/counter_value_426_add_4_1/C1->control/counter_inst/counter_value_426_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344         5.885  2       
+control/counter_inst/n6173                                NET DELAY            2.075         7.960  1       
+control/counter_inst/counter_value_426_add_4_3/CI0->control/counter_inst/counter_value_426_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278         8.238  2       
+control/counter_inst/n12377                               NET DELAY            2.075        10.313  1       
+control/counter_inst/counter_value_426_add_4_3/CI1->control/counter_inst/counter_value_426_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        10.591  2       
+control/counter_inst/n6175                                NET DELAY            2.075        12.666  1       
+control/counter_inst/counter_value_426_add_4_5/CI0->control/counter_inst/counter_value_426_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        12.944  2       
+control/counter_inst/n12380                               NET DELAY            2.075        15.019  1       
+control/counter_inst/counter_value_426_add_4_5/CI1->control/counter_inst/counter_value_426_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        15.297  2       
+control/counter_inst/n6177                                NET DELAY            2.075        17.372  1       
+control/counter_inst/counter_value_426_add_4_7/CI0->control/counter_inst/counter_value_426_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        17.650  2       
+control/counter_inst/n12383                               NET DELAY            2.075        19.725  1       
+control/counter_inst/counter_value_426_add_4_7/CI1->control/counter_inst/counter_value_426_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        20.003  2       
+control/counter_inst/n6179                                NET DELAY            2.075        22.078  1       
+control/counter_inst/counter_value_426_add_4_9/CI0->control/counter_inst/counter_value_426_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        22.356  2       
+control/counter_inst/n12386                               NET DELAY            2.075        24.431  1       
+control/counter_inst/counter_value_426_add_4_9/CI1->control/counter_inst/counter_value_426_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        24.709  2       
+control/counter_inst/n6181                                NET DELAY            2.075        26.784  1       
+control/counter_inst/counter_value_426_add_4_11/CI0->control/counter_inst/counter_value_426_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        27.062  2       
+control/counter_inst/n12389                               NET DELAY            2.075        29.137  1       
+control/counter_inst/counter_value_426_add_4_11/CI1->control/counter_inst/counter_value_426_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        29.415  2       
+control/counter_inst/n6183                                NET DELAY            2.075        31.490  1       
+control/counter_inst/counter_value_426_add_4_13/D0->control/counter_inst/counter_value_426_add_4_13/S0
+                                          SLICE           D0_TO_F0_DELAY       0.477        31.967  1       
+control/counter_inst/n61[11] ( DI0 )                      NET DELAY            2.075        34.042  1       
+
+
+                                                          CONSTRAINT     0.000        20.833  1       
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000        20.833  8       
+control/counter_inst/clk_wire ( CLK )                     NET DELAY      2.075        22.908  1       
+                                                          Uncertainty    0.000        22.908  
+                                                          Setup time     0.199        22.709  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         22.709  
+Arrival Time                                                                         -34.041  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                 -11.332  
+
+
+
+
+++++ Path 6 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : color/car_clk_counter_i31_597__i31/Q  (SLICE)
+Path End         : color/car_clk_counter_i31_597__i31/D  (SLICE)
+Source Clock     : pll/lscc_pll_inst/fpga_clock_c (R)
+Destination Clock: pll/lscc_pll_inst/fpga_clock_c (R)
+Logic Level      : 39
+Delay Ratio      : 85.8% (route), 14.2% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 83.333 ns 
+Path Slack       : -11.204 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075         2.075  1       
+
+
+
+color/car_clk_counter_i31_597__i31/CK->color/car_clk_counter_i31_597__i31/Q
+                                          SLICE           CLK_TO_Q0_DELAY      1.391         3.466  2       
+color/car_clk_counter_31__N_162[31]                       NET DELAY            2.075         5.541  1       
+color/i14_4_lut_adj_510/A->color/i14_4_lut_adj_510/Z
+                                          SLICE           A0_TO_F0_DELAY       0.477         6.018  1       
+color/n39_adj_1169                                        NET DELAY            2.075         8.093  1       
+color/i23_4_lut/A->color/i23_4_lut/Z      SLICE           A0_TO_F0_DELAY       0.477         8.570  1       
+color/n48_adj_1161                                        NET DELAY            2.075        10.645  1       
+color/i24_4_lut/B->color/i24_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477        11.122  2       
+color/n6986                                               NET DELAY            2.075        13.197  1       
+color/i1_2_lut/A->color/i1_2_lut/Z        SLICE           A0_TO_F0_DELAY       0.477        13.674  3       
+color/n7                                                  NET DELAY            2.075        15.749  1       
+color/i6_4_lut/C->color/i6_4_lut/Z        SLICE           C0_TO_F0_DELAY       0.477        16.226  27      
+color/n8024                                               NET DELAY            2.075        18.301  1       
+color/i2473_2_lut_3_lut/B->color/i2473_2_lut_3_lut/Z
+                                          SLICE           B0_TO_F0_DELAY       0.477        18.778  1       
+color/n166_adj_1355[0]                                    NET DELAY            2.075        20.853  1       
+color/car_clk_counter_i31_597_add_4_1/C1->color/car_clk_counter_i31_597_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344        21.197  2       
+color/n6247                                               NET DELAY            2.075        23.272  1       
+color/car_clk_counter_i31_597_add_4_3/CI0->color/car_clk_counter_i31_597_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        23.550  2       
+color/n12575                                              NET DELAY            2.075        25.625  1       
+color/car_clk_counter_i31_597_add_4_3/CI1->color/car_clk_counter_i31_597_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        25.903  2       
+color/n6249                                               NET DELAY            2.075        27.978  1       
+color/car_clk_counter_i31_597_add_4_5/CI0->color/car_clk_counter_i31_597_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        28.256  2       
+color/n12581                                              NET DELAY            2.075        30.331  1       
+color/car_clk_counter_i31_597_add_4_5/CI1->color/car_clk_counter_i31_597_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        30.609  2       
+color/n6251                                               NET DELAY            2.075        32.684  1       
+color/car_clk_counter_i31_597_add_4_7/CI0->color/car_clk_counter_i31_597_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        32.962  2       
+color/n12584                                              NET DELAY            2.075        35.037  1       
+color/car_clk_counter_i31_597_add_4_7/CI1->color/car_clk_counter_i31_597_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        35.315  2       
+color/n6253                                               NET DELAY            2.075        37.390  1       
+color/car_clk_counter_i31_597_add_4_9/CI0->color/car_clk_counter_i31_597_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        37.668  2       
+color/n12587                                              NET DELAY            2.075        39.743  1       
+color/car_clk_counter_i31_597_add_4_9/CI1->color/car_clk_counter_i31_597_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        40.021  2       
+color/n6255                                               NET DELAY            2.075        42.096  1       
+color/car_clk_counter_i31_597_add_4_11/CI0->color/car_clk_counter_i31_597_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        42.374  2       
+color/n12590                                              NET DELAY            2.075        44.449  1       
+color/car_clk_counter_i31_597_add_4_11/CI1->color/car_clk_counter_i31_597_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        44.727  2       
+color/n6257                                               NET DELAY            2.075        46.802  1       
+color/car_clk_counter_i31_597_add_4_13/CI0->color/car_clk_counter_i31_597_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        47.080  2       
+color/n12593                                              NET DELAY            2.075        49.155  1       
+color/car_clk_counter_i31_597_add_4_13/CI1->color/car_clk_counter_i31_597_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        49.433  2       
+color/n6259                                               NET DELAY            2.075        51.508  1       
+color/car_clk_counter_i31_597_add_4_15/CI0->color/car_clk_counter_i31_597_add_4_15/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        51.786  2       
+color/n12596                                              NET DELAY            2.075        53.861  1       
+color/car_clk_counter_i31_597_add_4_15/CI1->color/car_clk_counter_i31_597_add_4_15/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        54.139  2       
+color/n6261                                               NET DELAY            2.075        56.214  1       
+color/car_clk_counter_i31_597_add_4_17/CI0->color/car_clk_counter_i31_597_add_4_17/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        56.492  2       
+color/n12599                                              NET DELAY            2.075        58.567  1       
+color/car_clk_counter_i31_597_add_4_17/CI1->color/car_clk_counter_i31_597_add_4_17/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        58.845  2       
+color/n6263                                               NET DELAY            2.075        60.920  1       
+color/car_clk_counter_i31_597_add_4_19/CI0->color/car_clk_counter_i31_597_add_4_19/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        61.198  2       
+color/n12602                                              NET DELAY            2.075        63.273  1       
+color/car_clk_counter_i31_597_add_4_19/CI1->color/car_clk_counter_i31_597_add_4_19/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        63.551  2       
+color/n6265                                               NET DELAY            2.075        65.626  1       
+color/car_clk_counter_i31_597_add_4_21/CI0->color/car_clk_counter_i31_597_add_4_21/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        65.904  2       
+color/n12605                                              NET DELAY            2.075        67.979  1       
+color/car_clk_counter_i31_597_add_4_21/CI1->color/car_clk_counter_i31_597_add_4_21/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        68.257  2       
+color/n6267                                               NET DELAY            2.075        70.332  1       
+color/car_clk_counter_i31_597_add_4_23/CI0->color/car_clk_counter_i31_597_add_4_23/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        70.610  2       
+color/n12608                                              NET DELAY            2.075        72.685  1       
+color/car_clk_counter_i31_597_add_4_23/CI1->color/car_clk_counter_i31_597_add_4_23/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        72.963  2       
+color/n6269                                               NET DELAY            2.075        75.038  1       
+color/car_clk_counter_i31_597_add_4_25/CI0->color/car_clk_counter_i31_597_add_4_25/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        75.316  2       
+color/n12611                                              NET DELAY            2.075        77.391  1       
+color/car_clk_counter_i31_597_add_4_25/CI1->color/car_clk_counter_i31_597_add_4_25/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        77.669  2       
+color/n6271                                               NET DELAY            2.075        79.744  1       
+color/car_clk_counter_i31_597_add_4_27/CI0->color/car_clk_counter_i31_597_add_4_27/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        80.022  2       
+color/n12614                                              NET DELAY            2.075        82.097  1       
+color/car_clk_counter_i31_597_add_4_27/CI1->color/car_clk_counter_i31_597_add_4_27/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        82.375  2       
+color/n6273                                               NET DELAY            2.075        84.450  1       
+color/car_clk_counter_i31_597_add_4_29/CI0->color/car_clk_counter_i31_597_add_4_29/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        84.728  2       
+color/n12617                                              NET DELAY            2.075        86.803  1       
+color/car_clk_counter_i31_597_add_4_29/CI1->color/car_clk_counter_i31_597_add_4_29/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        87.081  2       
+color/n6275                                               NET DELAY            2.075        89.156  1       
+color/car_clk_counter_i31_597_add_4_31/CI0->color/car_clk_counter_i31_597_add_4_31/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        89.434  2       
+color/n12620                                              NET DELAY            2.075        91.509  1       
+color/car_clk_counter_i31_597_add_4_31/CI1->color/car_clk_counter_i31_597_add_4_31/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        91.787  2       
+color/n6277                                               NET DELAY            2.075        93.862  1       
+color/car_clk_counter_i31_597_add_4_33/D0->color/car_clk_counter_i31_597_add_4_33/S0
+                                          SLICE           D0_TO_F0_DELAY       0.477        94.339  1       
+color/n133[31] ( DI0 )                                    NET DELAY            2.075        96.414  1       
+
+
+                                                          CONSTRAINT     0.000        83.333  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000        83.333  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075        85.408  1       
+                                                          Uncertainty    0.000        85.408  
+                                                          Setup time     0.199        85.209  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         85.209  
+Arrival Time                                                                         -96.414  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                 -11.204  
+
+
+
+
+++++ Path 7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : color/frog_clk_counter_i31_596__i27/Q  (SLICE)
+Path End         : color/frog_clk_counter_i31_596__i29/D  (SLICE)
+Source Clock     : pll/lscc_pll_inst/fpga_clock_c (R)
+Destination Clock: pll/lscc_pll_inst/fpga_clock_c (R)
+Logic Level      : 38
+Delay Ratio      : 85.5% (route), 14.5% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 83.333 ns 
+Path Slack       : -9.050 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+
+
+
+color/frog_clk_counter_i31_596__i27/CK->color/frog_clk_counter_i31_596__i27/Q
+                                          SLICE           CLK_TO_Q0_DELAY      1.391         3.466  2       
+color/frog_clk_counter_31__N_108[27]                      NET DELAY            2.075         5.541  1       
+color/i14_4_lut/A->color/i14_4_lut/Z      SLICE           A0_TO_F0_DELAY       0.477         6.018  1       
+color/n36_adj_983                                         NET DELAY            2.075         8.093  1       
+color/i18_4_lut/B->color/i18_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477         8.570  1       
+color/n40_adj_982                                         NET DELAY            2.075        10.645  1       
+color/i20_4_lut/B->color/i20_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477        11.122  1       
+color/n42_adj_969                                         NET DELAY            2.075        13.197  1       
+color/i1_4_lut/C->color/i1_4_lut/Z        SLICE           C0_TO_F0_DELAY       0.477        13.674  2       
+color/n10_adj_957                                         NET DELAY            2.075        15.749  1       
+color/i5_2_lut/B->color/i5_2_lut/Z        SLICE           B0_TO_F0_DELAY       0.477        16.226  2       
+color/n14_adj_958                                         NET DELAY            2.075        18.301  1       
+color/i8_4_lut_adj_533/C->color/i8_4_lut_adj_533/Z
+                                          SLICE           C0_TO_F0_DELAY       0.477        18.778  29      
+color/n8034                                               NET DELAY            2.075        20.853  1       
+color/i2475_2_lut_4_lut/B->color/i2475_2_lut_4_lut/Z
+                                          SLICE           B0_TO_F0_DELAY       0.477        21.330  1       
+color/n166[0]                                             NET DELAY            2.075        23.405  1       
+color/frog_clk_counter_i31_596_add_4_1/C1->color/frog_clk_counter_i31_596_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344        23.749  2       
+color/n6280                                               NET DELAY            2.075        25.824  1       
+color/frog_clk_counter_i31_596_add_4_3/CI0->color/frog_clk_counter_i31_596_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        26.102  2       
+color/n12626                                              NET DELAY            2.075        28.177  1       
+color/frog_clk_counter_i31_596_add_4_3/CI1->color/frog_clk_counter_i31_596_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        28.455  2       
+color/n6282                                               NET DELAY            2.075        30.530  1       
+color/frog_clk_counter_i31_596_add_4_5/CI0->color/frog_clk_counter_i31_596_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        30.808  2       
+color/n12629                                              NET DELAY            2.075        32.883  1       
+color/frog_clk_counter_i31_596_add_4_5/CI1->color/frog_clk_counter_i31_596_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        33.161  2       
+color/n6284                                               NET DELAY            2.075        35.236  1       
+color/frog_clk_counter_i31_596_add_4_7/CI0->color/frog_clk_counter_i31_596_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        35.514  2       
+color/n12632                                              NET DELAY            2.075        37.589  1       
+color/frog_clk_counter_i31_596_add_4_7/CI1->color/frog_clk_counter_i31_596_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        37.867  2       
+color/n6286                                               NET DELAY            2.075        39.942  1       
+color/frog_clk_counter_i31_596_add_4_9/CI0->color/frog_clk_counter_i31_596_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        40.220  2       
+color/n12635                                              NET DELAY            2.075        42.295  1       
+color/frog_clk_counter_i31_596_add_4_9/CI1->color/frog_clk_counter_i31_596_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        42.573  2       
+color/n6288                                               NET DELAY            2.075        44.648  1       
+color/frog_clk_counter_i31_596_add_4_11/CI0->color/frog_clk_counter_i31_596_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        44.926  2       
+color/n12638                                              NET DELAY            2.075        47.001  1       
+color/frog_clk_counter_i31_596_add_4_11/CI1->color/frog_clk_counter_i31_596_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        47.279  2       
+color/n6290                                               NET DELAY            2.075        49.354  1       
+color/frog_clk_counter_i31_596_add_4_13/CI0->color/frog_clk_counter_i31_596_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        49.632  2       
+color/n12641                                              NET DELAY            2.075        51.707  1       
+color/frog_clk_counter_i31_596_add_4_13/CI1->color/frog_clk_counter_i31_596_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        51.985  2       
+color/n6292                                               NET DELAY            2.075        54.060  1       
+color/frog_clk_counter_i31_596_add_4_15/CI0->color/frog_clk_counter_i31_596_add_4_15/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        54.338  2       
+color/n12644                                              NET DELAY            2.075        56.413  1       
+color/frog_clk_counter_i31_596_add_4_15/CI1->color/frog_clk_counter_i31_596_add_4_15/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        56.691  2       
+color/n6294                                               NET DELAY            2.075        58.766  1       
+color/frog_clk_counter_i31_596_add_4_17/CI0->color/frog_clk_counter_i31_596_add_4_17/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        59.044  2       
+color/n12647                                              NET DELAY            2.075        61.119  1       
+color/frog_clk_counter_i31_596_add_4_17/CI1->color/frog_clk_counter_i31_596_add_4_17/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        61.397  2       
+color/n6296                                               NET DELAY            2.075        63.472  1       
+color/frog_clk_counter_i31_596_add_4_19/CI0->color/frog_clk_counter_i31_596_add_4_19/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        63.750  2       
+color/n12650                                              NET DELAY            2.075        65.825  1       
+color/frog_clk_counter_i31_596_add_4_19/CI1->color/frog_clk_counter_i31_596_add_4_19/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        66.103  2       
+color/n6298                                               NET DELAY            2.075        68.178  1       
+color/frog_clk_counter_i31_596_add_4_21/CI0->color/frog_clk_counter_i31_596_add_4_21/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        68.456  2       
+color/n12653                                              NET DELAY            2.075        70.531  1       
+color/frog_clk_counter_i31_596_add_4_21/CI1->color/frog_clk_counter_i31_596_add_4_21/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        70.809  2       
+color/n6300                                               NET DELAY            2.075        72.884  1       
+color/frog_clk_counter_i31_596_add_4_23/CI0->color/frog_clk_counter_i31_596_add_4_23/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        73.162  2       
+color/n12656                                              NET DELAY            2.075        75.237  1       
+color/frog_clk_counter_i31_596_add_4_23/CI1->color/frog_clk_counter_i31_596_add_4_23/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        75.515  2       
+color/n6302                                               NET DELAY            2.075        77.590  1       
+color/frog_clk_counter_i31_596_add_4_25/CI0->color/frog_clk_counter_i31_596_add_4_25/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        77.868  2       
+color/n12659                                              NET DELAY            2.075        79.943  1       
+color/frog_clk_counter_i31_596_add_4_25/CI1->color/frog_clk_counter_i31_596_add_4_25/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        80.221  2       
+color/n6304                                               NET DELAY            2.075        82.296  1       
+color/frog_clk_counter_i31_596_add_4_27/CI0->color/frog_clk_counter_i31_596_add_4_27/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        82.574  2       
+color/n12662                                              NET DELAY            2.075        84.649  1       
+color/frog_clk_counter_i31_596_add_4_27/CI1->color/frog_clk_counter_i31_596_add_4_27/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        84.927  2       
+color/n6306                                               NET DELAY            2.075        87.002  1       
+color/frog_clk_counter_i31_596_add_4_29/CI0->color/frog_clk_counter_i31_596_add_4_29/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        87.280  2       
+color/n12665                                              NET DELAY            2.075        89.355  1       
+color/frog_clk_counter_i31_596_add_4_29/CI1->color/frog_clk_counter_i31_596_add_4_29/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        89.633  2       
+color/n6308                                               NET DELAY            2.075        91.708  1       
+color/frog_clk_counter_i31_596_add_4_31/D0->color/frog_clk_counter_i31_596_add_4_31/S0
+                                          SLICE           D0_TO_F0_DELAY       0.477        92.185  1       
+color/n133_adj_1357[29] ( DI0 )                           NET DELAY            2.075        94.260  1       
+
+
+                                                          CONSTRAINT     0.000        83.333  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000        83.333  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075        85.408  1       
+                                                          Uncertainty    0.000        85.408  
+                                                          Setup time     0.199        85.209  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         85.209  
+Arrival Time                                                                         -94.260  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                  -9.050  
+
+
+
+
+++++ Path 8 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : control/counter_inst/counter_value_426__i1/Q  (SLICE)
+Path End         : control/counter_inst/counter_value_426__i11/D  (SLICE)
+Source Clock     : control/clk_wire (R)
+Destination Clock: control/clk_wire (R)
+Logic Level      : 12
+Delay Ratio      : 84.1% (route), 15.9% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 20.833 ns 
+Path Slack       : -8.979 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000         0.000  8       
+control/counter_inst/clk_wire                             NET DELAY      2.075         2.075  1       
+
+
+
+control/counter_inst/counter_value_426__i1/CK->control/counter_inst/counter_value_426__i1/Q
+                                          SLICE           CLK_TO_Q1_DELAY      1.391         3.466  1       
+control/counter_inst/n14                                  NET DELAY            2.075         5.541  1       
+control/counter_inst/counter_value_426_add_4_1/C1->control/counter_inst/counter_value_426_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344         5.885  2       
+control/counter_inst/n6173                                NET DELAY            2.075         7.960  1       
+control/counter_inst/counter_value_426_add_4_3/CI0->control/counter_inst/counter_value_426_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278         8.238  2       
+control/counter_inst/n12377                               NET DELAY            2.075        10.313  1       
+control/counter_inst/counter_value_426_add_4_3/CI1->control/counter_inst/counter_value_426_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        10.591  2       
+control/counter_inst/n6175                                NET DELAY            2.075        12.666  1       
+control/counter_inst/counter_value_426_add_4_5/CI0->control/counter_inst/counter_value_426_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        12.944  2       
+control/counter_inst/n12380                               NET DELAY            2.075        15.019  1       
+control/counter_inst/counter_value_426_add_4_5/CI1->control/counter_inst/counter_value_426_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        15.297  2       
+control/counter_inst/n6177                                NET DELAY            2.075        17.372  1       
+control/counter_inst/counter_value_426_add_4_7/CI0->control/counter_inst/counter_value_426_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        17.650  2       
+control/counter_inst/n12383                               NET DELAY            2.075        19.725  1       
+control/counter_inst/counter_value_426_add_4_7/CI1->control/counter_inst/counter_value_426_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        20.003  2       
+control/counter_inst/n6179                                NET DELAY            2.075        22.078  1       
+control/counter_inst/counter_value_426_add_4_9/CI0->control/counter_inst/counter_value_426_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        22.356  2       
+control/counter_inst/n12386                               NET DELAY            2.075        24.431  1       
+control/counter_inst/counter_value_426_add_4_9/CI1->control/counter_inst/counter_value_426_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        24.709  2       
+control/counter_inst/n6181                                NET DELAY            2.075        26.784  1       
+control/counter_inst/counter_value_426_add_4_11/CI0->control/counter_inst/counter_value_426_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        27.062  2       
+control/counter_inst/n12389                               NET DELAY            2.075        29.137  1       
+control/counter_inst/counter_value_426_add_4_11/D1->control/counter_inst/counter_value_426_add_4_11/S1
+                                          SLICE           D1_TO_F1_DELAY       0.477        29.614  1       
+control/counter_inst/n61[10] ( DI1 )                      NET DELAY            2.075        31.689  1       
+
+
+                                                          CONSTRAINT     0.000        20.833  1       
+control.clk_inst/CLKHF                    HFOSC           CLOCK LATENCY  0.000        20.833  8       
+control/counter_inst/clk_wire ( CLK )                     NET DELAY      2.075        22.908  1       
+                                                          Uncertainty    0.000        22.908  
+                                                          Setup time     0.199        22.709  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         22.709  
+Arrival Time                                                                         -31.688  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                  -8.979  
+
+
+
+
+++++ Path 9 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : color/car_clk_counter_i31_597__i31/Q  (SLICE)
+Path End         : color/car_clk_counter_i31_597__i30/D  (SLICE)
+Source Clock     : pll/lscc_pll_inst/fpga_clock_c (R)
+Destination Clock: pll/lscc_pll_inst/fpga_clock_c (R)
+Logic Level      : 38
+Delay Ratio      : 85.7% (route), 14.3% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 83.333 ns 
+Path Slack       : -8.851 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+
+
+
+color/car_clk_counter_i31_597__i31/CK->color/car_clk_counter_i31_597__i31/Q
+                                          SLICE           CLK_TO_Q0_DELAY      1.391         3.466  2       
+color/car_clk_counter_31__N_162[31]                       NET DELAY            2.075         5.541  1       
+color/i14_4_lut_adj_510/A->color/i14_4_lut_adj_510/Z
+                                          SLICE           A0_TO_F0_DELAY       0.477         6.018  1       
+color/n39_adj_1169                                        NET DELAY            2.075         8.093  1       
+color/i23_4_lut/A->color/i23_4_lut/Z      SLICE           A0_TO_F0_DELAY       0.477         8.570  1       
+color/n48_adj_1161                                        NET DELAY            2.075        10.645  1       
+color/i24_4_lut/B->color/i24_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477        11.122  2       
+color/n6986                                               NET DELAY            2.075        13.197  1       
+color/i1_2_lut/A->color/i1_2_lut/Z        SLICE           A0_TO_F0_DELAY       0.477        13.674  3       
+color/n7                                                  NET DELAY            2.075        15.749  1       
+color/i6_4_lut/C->color/i6_4_lut/Z        SLICE           C0_TO_F0_DELAY       0.477        16.226  27      
+color/n8024                                               NET DELAY            2.075        18.301  1       
+color/i2473_2_lut_3_lut/B->color/i2473_2_lut_3_lut/Z
+                                          SLICE           B0_TO_F0_DELAY       0.477        18.778  1       
+color/n166_adj_1355[0]                                    NET DELAY            2.075        20.853  1       
+color/car_clk_counter_i31_597_add_4_1/C1->color/car_clk_counter_i31_597_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344        21.197  2       
+color/n6247                                               NET DELAY            2.075        23.272  1       
+color/car_clk_counter_i31_597_add_4_3/CI0->color/car_clk_counter_i31_597_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        23.550  2       
+color/n12575                                              NET DELAY            2.075        25.625  1       
+color/car_clk_counter_i31_597_add_4_3/CI1->color/car_clk_counter_i31_597_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        25.903  2       
+color/n6249                                               NET DELAY            2.075        27.978  1       
+color/car_clk_counter_i31_597_add_4_5/CI0->color/car_clk_counter_i31_597_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        28.256  2       
+color/n12581                                              NET DELAY            2.075        30.331  1       
+color/car_clk_counter_i31_597_add_4_5/CI1->color/car_clk_counter_i31_597_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        30.609  2       
+color/n6251                                               NET DELAY            2.075        32.684  1       
+color/car_clk_counter_i31_597_add_4_7/CI0->color/car_clk_counter_i31_597_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        32.962  2       
+color/n12584                                              NET DELAY            2.075        35.037  1       
+color/car_clk_counter_i31_597_add_4_7/CI1->color/car_clk_counter_i31_597_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        35.315  2       
+color/n6253                                               NET DELAY            2.075        37.390  1       
+color/car_clk_counter_i31_597_add_4_9/CI0->color/car_clk_counter_i31_597_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        37.668  2       
+color/n12587                                              NET DELAY            2.075        39.743  1       
+color/car_clk_counter_i31_597_add_4_9/CI1->color/car_clk_counter_i31_597_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        40.021  2       
+color/n6255                                               NET DELAY            2.075        42.096  1       
+color/car_clk_counter_i31_597_add_4_11/CI0->color/car_clk_counter_i31_597_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        42.374  2       
+color/n12590                                              NET DELAY            2.075        44.449  1       
+color/car_clk_counter_i31_597_add_4_11/CI1->color/car_clk_counter_i31_597_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        44.727  2       
+color/n6257                                               NET DELAY            2.075        46.802  1       
+color/car_clk_counter_i31_597_add_4_13/CI0->color/car_clk_counter_i31_597_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        47.080  2       
+color/n12593                                              NET DELAY            2.075        49.155  1       
+color/car_clk_counter_i31_597_add_4_13/CI1->color/car_clk_counter_i31_597_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        49.433  2       
+color/n6259                                               NET DELAY            2.075        51.508  1       
+color/car_clk_counter_i31_597_add_4_15/CI0->color/car_clk_counter_i31_597_add_4_15/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        51.786  2       
+color/n12596                                              NET DELAY            2.075        53.861  1       
+color/car_clk_counter_i31_597_add_4_15/CI1->color/car_clk_counter_i31_597_add_4_15/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        54.139  2       
+color/n6261                                               NET DELAY            2.075        56.214  1       
+color/car_clk_counter_i31_597_add_4_17/CI0->color/car_clk_counter_i31_597_add_4_17/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        56.492  2       
+color/n12599                                              NET DELAY            2.075        58.567  1       
+color/car_clk_counter_i31_597_add_4_17/CI1->color/car_clk_counter_i31_597_add_4_17/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        58.845  2       
+color/n6263                                               NET DELAY            2.075        60.920  1       
+color/car_clk_counter_i31_597_add_4_19/CI0->color/car_clk_counter_i31_597_add_4_19/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        61.198  2       
+color/n12602                                              NET DELAY            2.075        63.273  1       
+color/car_clk_counter_i31_597_add_4_19/CI1->color/car_clk_counter_i31_597_add_4_19/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        63.551  2       
+color/n6265                                               NET DELAY            2.075        65.626  1       
+color/car_clk_counter_i31_597_add_4_21/CI0->color/car_clk_counter_i31_597_add_4_21/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        65.904  2       
+color/n12605                                              NET DELAY            2.075        67.979  1       
+color/car_clk_counter_i31_597_add_4_21/CI1->color/car_clk_counter_i31_597_add_4_21/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        68.257  2       
+color/n6267                                               NET DELAY            2.075        70.332  1       
+color/car_clk_counter_i31_597_add_4_23/CI0->color/car_clk_counter_i31_597_add_4_23/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        70.610  2       
+color/n12608                                              NET DELAY            2.075        72.685  1       
+color/car_clk_counter_i31_597_add_4_23/CI1->color/car_clk_counter_i31_597_add_4_23/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        72.963  2       
+color/n6269                                               NET DELAY            2.075        75.038  1       
+color/car_clk_counter_i31_597_add_4_25/CI0->color/car_clk_counter_i31_597_add_4_25/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        75.316  2       
+color/n12611                                              NET DELAY            2.075        77.391  1       
+color/car_clk_counter_i31_597_add_4_25/CI1->color/car_clk_counter_i31_597_add_4_25/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        77.669  2       
+color/n6271                                               NET DELAY            2.075        79.744  1       
+color/car_clk_counter_i31_597_add_4_27/CI0->color/car_clk_counter_i31_597_add_4_27/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        80.022  2       
+color/n12614                                              NET DELAY            2.075        82.097  1       
+color/car_clk_counter_i31_597_add_4_27/CI1->color/car_clk_counter_i31_597_add_4_27/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        82.375  2       
+color/n6273                                               NET DELAY            2.075        84.450  1       
+color/car_clk_counter_i31_597_add_4_29/CI0->color/car_clk_counter_i31_597_add_4_29/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        84.728  2       
+color/n12617                                              NET DELAY            2.075        86.803  1       
+color/car_clk_counter_i31_597_add_4_29/CI1->color/car_clk_counter_i31_597_add_4_29/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        87.081  2       
+color/n6275                                               NET DELAY            2.075        89.156  1       
+color/car_clk_counter_i31_597_add_4_31/CI0->color/car_clk_counter_i31_597_add_4_31/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        89.434  2       
+color/n12620                                              NET DELAY            2.075        91.509  1       
+color/car_clk_counter_i31_597_add_4_31/D1->color/car_clk_counter_i31_597_add_4_31/S1
+                                          SLICE           D1_TO_F1_DELAY       0.477        91.986  1       
+color/n133[30] ( DI1 )                                    NET DELAY            2.075        94.061  1       
+
+
+                                                          CONSTRAINT     0.000        83.333  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000        83.333  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075        85.408  1       
+                                                          Uncertainty    0.000        85.408  
+                                                          Setup time     0.199        85.209  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         85.209  
+Arrival Time                                                                         -94.061  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                  -8.851  
+
+
+
+
+++++ Path 10 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : color/frog_clk_counter_i31_596__i27/Q  (SLICE)
+Path End         : color/frog_clk_counter_i31_596__i28/D  (SLICE)
+Source Clock     : pll/lscc_pll_inst/fpga_clock_c (R)
+Destination Clock: pll/lscc_pll_inst/fpga_clock_c (R)
+Logic Level      : 37
+Delay Ratio      : 85.5% (route), 14.5% (logic)
+Clock Skew       : 0.000 ns
+Setup Constraint : 83.333 ns 
+Path Slack       : -6.697 ns  (Failed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075         2.075  1       
+
+
+
+color/frog_clk_counter_i31_596__i27/CK->color/frog_clk_counter_i31_596__i27/Q
+                                          SLICE           CLK_TO_Q0_DELAY      1.391         3.466  2       
+color/frog_clk_counter_31__N_108[27]                      NET DELAY            2.075         5.541  1       
+color/i14_4_lut/A->color/i14_4_lut/Z      SLICE           A0_TO_F0_DELAY       0.477         6.018  1       
+color/n36_adj_983                                         NET DELAY            2.075         8.093  1       
+color/i18_4_lut/B->color/i18_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477         8.570  1       
+color/n40_adj_982                                         NET DELAY            2.075        10.645  1       
+color/i20_4_lut/B->color/i20_4_lut/Z      SLICE           B0_TO_F0_DELAY       0.477        11.122  1       
+color/n42_adj_969                                         NET DELAY            2.075        13.197  1       
+color/i1_4_lut/C->color/i1_4_lut/Z        SLICE           C0_TO_F0_DELAY       0.477        13.674  2       
+color/n10_adj_957                                         NET DELAY            2.075        15.749  1       
+color/i5_2_lut/B->color/i5_2_lut/Z        SLICE           B0_TO_F0_DELAY       0.477        16.226  2       
+color/n14_adj_958                                         NET DELAY            2.075        18.301  1       
+color/i8_4_lut_adj_533/C->color/i8_4_lut_adj_533/Z
+                                          SLICE           C0_TO_F0_DELAY       0.477        18.778  29      
+color/n8034                                               NET DELAY            2.075        20.853  1       
+color/i2475_2_lut_4_lut/B->color/i2475_2_lut_4_lut/Z
+                                          SLICE           B0_TO_F0_DELAY       0.477        21.330  1       
+color/n166[0]                                             NET DELAY            2.075        23.405  1       
+color/frog_clk_counter_i31_596_add_4_1/C1->color/frog_clk_counter_i31_596_add_4_1/CO1
+                                          SLICE           C1_TO_COUT1_DELAY    0.344        23.749  2       
+color/n6280                                               NET DELAY            2.075        25.824  1       
+color/frog_clk_counter_i31_596_add_4_3/CI0->color/frog_clk_counter_i31_596_add_4_3/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        26.102  2       
+color/n12626                                              NET DELAY            2.075        28.177  1       
+color/frog_clk_counter_i31_596_add_4_3/CI1->color/frog_clk_counter_i31_596_add_4_3/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        28.455  2       
+color/n6282                                               NET DELAY            2.075        30.530  1       
+color/frog_clk_counter_i31_596_add_4_5/CI0->color/frog_clk_counter_i31_596_add_4_5/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        30.808  2       
+color/n12629                                              NET DELAY            2.075        32.883  1       
+color/frog_clk_counter_i31_596_add_4_5/CI1->color/frog_clk_counter_i31_596_add_4_5/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        33.161  2       
+color/n6284                                               NET DELAY            2.075        35.236  1       
+color/frog_clk_counter_i31_596_add_4_7/CI0->color/frog_clk_counter_i31_596_add_4_7/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        35.514  2       
+color/n12632                                              NET DELAY            2.075        37.589  1       
+color/frog_clk_counter_i31_596_add_4_7/CI1->color/frog_clk_counter_i31_596_add_4_7/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        37.867  2       
+color/n6286                                               NET DELAY            2.075        39.942  1       
+color/frog_clk_counter_i31_596_add_4_9/CI0->color/frog_clk_counter_i31_596_add_4_9/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        40.220  2       
+color/n12635                                              NET DELAY            2.075        42.295  1       
+color/frog_clk_counter_i31_596_add_4_9/CI1->color/frog_clk_counter_i31_596_add_4_9/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        42.573  2       
+color/n6288                                               NET DELAY            2.075        44.648  1       
+color/frog_clk_counter_i31_596_add_4_11/CI0->color/frog_clk_counter_i31_596_add_4_11/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        44.926  2       
+color/n12638                                              NET DELAY            2.075        47.001  1       
+color/frog_clk_counter_i31_596_add_4_11/CI1->color/frog_clk_counter_i31_596_add_4_11/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        47.279  2       
+color/n6290                                               NET DELAY            2.075        49.354  1       
+color/frog_clk_counter_i31_596_add_4_13/CI0->color/frog_clk_counter_i31_596_add_4_13/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        49.632  2       
+color/n12641                                              NET DELAY            2.075        51.707  1       
+color/frog_clk_counter_i31_596_add_4_13/CI1->color/frog_clk_counter_i31_596_add_4_13/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        51.985  2       
+color/n6292                                               NET DELAY            2.075        54.060  1       
+color/frog_clk_counter_i31_596_add_4_15/CI0->color/frog_clk_counter_i31_596_add_4_15/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        54.338  2       
+color/n12644                                              NET DELAY            2.075        56.413  1       
+color/frog_clk_counter_i31_596_add_4_15/CI1->color/frog_clk_counter_i31_596_add_4_15/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        56.691  2       
+color/n6294                                               NET DELAY            2.075        58.766  1       
+color/frog_clk_counter_i31_596_add_4_17/CI0->color/frog_clk_counter_i31_596_add_4_17/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        59.044  2       
+color/n12647                                              NET DELAY            2.075        61.119  1       
+color/frog_clk_counter_i31_596_add_4_17/CI1->color/frog_clk_counter_i31_596_add_4_17/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        61.397  2       
+color/n6296                                               NET DELAY            2.075        63.472  1       
+color/frog_clk_counter_i31_596_add_4_19/CI0->color/frog_clk_counter_i31_596_add_4_19/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        63.750  2       
+color/n12650                                              NET DELAY            2.075        65.825  1       
+color/frog_clk_counter_i31_596_add_4_19/CI1->color/frog_clk_counter_i31_596_add_4_19/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        66.103  2       
+color/n6298                                               NET DELAY            2.075        68.178  1       
+color/frog_clk_counter_i31_596_add_4_21/CI0->color/frog_clk_counter_i31_596_add_4_21/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        68.456  2       
+color/n12653                                              NET DELAY            2.075        70.531  1       
+color/frog_clk_counter_i31_596_add_4_21/CI1->color/frog_clk_counter_i31_596_add_4_21/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        70.809  2       
+color/n6300                                               NET DELAY            2.075        72.884  1       
+color/frog_clk_counter_i31_596_add_4_23/CI0->color/frog_clk_counter_i31_596_add_4_23/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        73.162  2       
+color/n12656                                              NET DELAY            2.075        75.237  1       
+color/frog_clk_counter_i31_596_add_4_23/CI1->color/frog_clk_counter_i31_596_add_4_23/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        75.515  2       
+color/n6302                                               NET DELAY            2.075        77.590  1       
+color/frog_clk_counter_i31_596_add_4_25/CI0->color/frog_clk_counter_i31_596_add_4_25/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        77.868  2       
+color/n12659                                              NET DELAY            2.075        79.943  1       
+color/frog_clk_counter_i31_596_add_4_25/CI1->color/frog_clk_counter_i31_596_add_4_25/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        80.221  2       
+color/n6304                                               NET DELAY            2.075        82.296  1       
+color/frog_clk_counter_i31_596_add_4_27/CI0->color/frog_clk_counter_i31_596_add_4_27/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        82.574  2       
+color/n12662                                              NET DELAY            2.075        84.649  1       
+color/frog_clk_counter_i31_596_add_4_27/CI1->color/frog_clk_counter_i31_596_add_4_27/CO1
+                                          SLICE           CIN1_TO_COUT1_DELAY  0.278        84.927  2       
+color/n6306                                               NET DELAY            2.075        87.002  1       
+color/frog_clk_counter_i31_596_add_4_29/CI0->color/frog_clk_counter_i31_596_add_4_29/CO0
+                                          SLICE           CIN0_TO_COUT0_DELAY  0.278        87.280  2       
+color/n12665                                              NET DELAY            2.075        89.355  1       
+color/frog_clk_counter_i31_596_add_4_29/D1->color/frog_clk_counter_i31_596_add_4_29/S1
+                                          SLICE           D1_TO_F1_DELAY       0.477        89.832  1       
+color/n133_adj_1357[28] ( DI1 )                           NET DELAY            2.075        91.907  1       
+
+
+                                                          CONSTRAINT     0.000        83.333  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000        83.333  42      
+pll/lscc_pll_inst/fpga_clock_c ( CLK )                    NET DELAY      2.075        85.408  1       
+                                                          Uncertainty    0.000        85.408  
+                                                          Setup time     0.199        85.209  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         85.209  
+Arrival Time                                                                         -91.907  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Failed)                                                                  -6.697  
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+                    End of Detailed Report for timing paths 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+
+##########################################################
+
+4.2  Hold Detailed Report
+==========================
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+Detail report of critical paths
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+                    Detailed Report for timing paths 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+++++ Path 1 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/col_count_424__i7/Q  (SLICE)
+Path End         : disp/row_count_423__i9/SP  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock                           NET DELAY      2.075         4.300  1       
+
+
+
+disp/col_count_424__i7/CK->disp/col_count_424__i7/Q
+                                          SLICE           CLK_TO_Q0_DELAY  0.768         5.068  10      
+color/col_out[7]                                          NET DELAY        2.075         7.143  1       
+disp/i8489_4_lut/C->disp/i8489_4_lut/Z    SLICE           C0_TO_F0_DELAY   0.249         7.392  13      
+disp/n2548 ( CE )                                         NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/col_count_424__i7/Q  (SLICE)
+Path End         : {disp/row_count_423__i7/SP   disp/row_count_423__i8/SP}  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock                           NET DELAY      2.075         4.300  1       
+
+
+
+disp/col_count_424__i7/CK->disp/col_count_424__i7/Q
+                                          SLICE           CLK_TO_Q0_DELAY  0.768         5.068  10      
+color/col_out[7]                                          NET DELAY        2.075         7.143  1       
+disp/i8489_4_lut/C->disp/i8489_4_lut/Z    SLICE           C0_TO_F0_DELAY   0.249         7.392  13      
+disp/n2548 ( CE )                                         NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 3 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/row_count_423__i7/Q  (SLICE)
+Path End         : disp/row_count_423__i7/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/row_count_423__i7/CK->disp/row_count_423__i7/Q
+                                          SLICE           CLK_TO_Q0_DELAY  0.768         5.068  22      
+color/row_out[7]                                          NET DELAY        2.075         7.143  1       
+disp/row_count_423_add_4_9/C0->disp/row_count_423_add_4_9/S0
+                                          SLICE           C0_TO_F0_DELAY   0.249         7.392  1       
+disp/n35[7] ( DI0 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 4 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/row_count_423__i8/Q  (SLICE)
+Path End         : disp/row_count_423__i8/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/row_count_423__i8/CK->disp/row_count_423__i8/Q
+                                          SLICE           CLK_TO_Q1_DELAY  0.768         5.068  19      
+color/row_out[8]                                          NET DELAY        2.075         7.143  1       
+disp/row_count_423_add_4_9/C1->disp/row_count_423_add_4_9/S1
+                                          SLICE           C1_TO_F1_DELAY   0.249         7.392  1       
+disp/n35[8] ( DI1 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 5 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/col_count_424__i1/Q  (SLICE)
+Path End         : disp/col_count_424__i1/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/col_count_424__i1/CK->disp/col_count_424__i1/Q
+                                          SLICE           CLK_TO_Q0_DELAY  0.768         5.068  3       
+disp/col_out[1]                                           NET DELAY        2.075         7.143  1       
+disp/col_count_424_add_4_3/C0->disp/col_count_424_add_4_3/S0
+                                          SLICE           C0_TO_F0_DELAY   0.249         7.392  1       
+disp/n45[1] ( DI0 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 6 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/col_count_424__i2/Q  (SLICE)
+Path End         : disp/col_count_424__i2/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/col_count_424__i2/CK->disp/col_count_424__i2/Q
+                                          SLICE           CLK_TO_Q1_DELAY  0.768         5.068  5       
+color/col_out[2]                                          NET DELAY        2.075         7.143  1       
+disp/col_count_424_add_4_3/C1->disp/col_count_424_add_4_3/S1
+                                          SLICE           C1_TO_F1_DELAY   0.249         7.392  1       
+disp/n45[2] ( DI1 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 7 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/col_count_424__i0/Q  (SLICE)
+Path End         : disp/col_count_424__i0/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/col_count_424__i0/CK->disp/col_count_424__i0/Q
+                                          SLICE           CLK_TO_Q1_DELAY  0.768         5.068  3       
+disp/col_out[0]                                           NET DELAY        2.075         7.143  1       
+disp/col_count_424_add_4_1/C1->disp/col_count_424_add_4_1/S1
+                                          SLICE           C1_TO_F1_DELAY   0.249         7.392  1       
+disp/n45[0] ( DI1 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 8 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/col_count_424__i7/Q  (SLICE)
+Path End         : {disp/row_count_423__i1/SP   disp/row_count_423__i2/SP}  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock                           NET DELAY      2.075         4.300  1       
+
+
+
+disp/col_count_424__i7/CK->disp/col_count_424__i7/Q
+                                          SLICE           CLK_TO_Q0_DELAY  0.768         5.068  10      
+color/col_out[7]                                          NET DELAY        2.075         7.143  1       
+disp/i8489_4_lut/C->disp/i8489_4_lut/Z    SLICE           C0_TO_F0_DELAY   0.249         7.392  13      
+disp/n2548 ( CE )                                         NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 9 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/row_count_423__i1/Q  (SLICE)
+Path End         : disp/row_count_423__i1/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/row_count_423__i1/CK->disp/row_count_423__i1/Q
+                                          SLICE           CLK_TO_Q0_DELAY  0.768         5.068  5       
+color/row_out[1]                                          NET DELAY        2.075         7.143  1       
+disp/row_count_423_add_4_3/C0->disp/row_count_423_add_4_3/S0
+                                          SLICE           C0_TO_F0_DELAY   0.249         7.392  1       
+disp/n35[1] ( DI0 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
+
+++++ Path 10 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+Path Begin       : disp/row_count_423__i2/Q  (SLICE)
+Path End         : disp/row_count_423__i2/D  (SLICE)
+Source Clock     : network_clock (R)
+Destination Clock: network_clock (R)
+Logic Level      : 2
+Delay Ratio      : 80.3% (route), 19.7% (logic)
+Clock Skew       : 0.000 ns
+Hold Constraint  : 0.000 ns 
+Path Slack       : 5.167 ns  (Passed)
+
+Name                                      Cell/Site Name  Delay Name     Delay  Arrival Time  Fanout  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+
+
+
+disp/row_count_423__i2/CK->disp/row_count_423__i2/Q
+                                          SLICE           CLK_TO_Q1_DELAY  0.768         5.068  11      
+color/row_out[2]                                          NET DELAY        2.075         7.143  1       
+disp/row_count_423_add_4_3/C1->disp/row_count_423_add_4_3/S1
+                                          SLICE           C1_TO_F1_DELAY   0.249         7.392  1       
+disp/n35[2] ( DI1 )                                       NET DELAY        2.075         9.467  1       
+
+
+                                                          CONSTRAINT     0.000         0.000  1       
+fpga_clock_pad.bb_inst/PADDI              PIO             CLOCK LATENCY  0.000         0.000  42      
+pll/lscc_pll_inst/fpga_clock_c                            NET DELAY      2.075         2.075  1       
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL
+                                          PLL                            0.000         2.075  12      
+pll.lscc_pll_inst.u_PLL_B/REFERENCECLK->pll.lscc_pll_inst.u_PLL_B/OUTGLOBAL (TOTAL_ADJUSTMENTS)
+                                          PLL                            0.150         2.225  12      
+pll/lscc_pll_inst/network_clock ( CLK )                   NET DELAY      2.075         4.300  1       
+                                                          Uncertainty    0.000         4.300  
+                                                          Hold time      0.000         4.300  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Required Time                                                                         -4.300  
+Arrival Time                                                                           9.467  
+----------------------------------------  --------------  -------------  -----  ------------  ------  
+Path Slack  (Passed)                                                                   5.167  
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+                    End of Detailed Report for timing paths 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+
+##########################################################
+

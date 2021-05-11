@@ -1,0 +1,79 @@
+----------------------------------------------------------------------
+Report for cell top.TECH
+Register bits:  464 of 5280 (8.788%)
+I/O cells:      13
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               CCU2        99          100.0
+                            FD1P3XZ       464          100.0
+                         HSOSC_CORE         1          100.0
+                                 IB         2          100.0
+                              IOL_B         1          100.0
+                               LUT4       957          100.0
+                              MAC16         2          100.0
+                                 OB        11          100.0
+                              PLL_B         1          100.0
+SUB MODULES
+                         controller         1
+                            counter         1
+                               game         1
+                              pll_1         1
+pll_1_ipgen_lscc_pll(DIVR="0",DIVF="66",DIVQ="5",FILTER_RANGE="1",PLLOUT_SELECT_PORTA="GENCLK",PLLOUT_SELECT_PORTB="GENCLK",FREQUENCY_PIN_REFERENCECLK="12.000000")         1
+                                vga         1
+                              TOTAL      1544
+----------------------------------------------------------------------
+Report for cell vga.v1
+Instance Path : disp
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                                FA2        12           12.1
+                            FD1P3XZ        20            4.3
+                               LUT4        20            2.1
+                              TOTAL        52
+----------------------------------------------------------------------
+Report for cell game.v1
+Instance Path : color
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                                FA2        79           79.8
+                            FD1P3XZ       410           88.4
+                               LUT4       861           90.0
+                              MAC16         2          100.0
+                              TOTAL      1352
+----------------------------------------------------------------------
+Report for cell pll_1.v1
+Instance Path : pll
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              PLL_B         1          100.0
+SUB MODULES
+pll_1_ipgen_lscc_pll(DIVR="0",DIVF="66",DIVQ="5",FILTER_RANGE="1",PLLOUT_SELECT_PORTA="GENCLK",PLLOUT_SELECT_PORTB="GENCLK",FREQUENCY_PIN_REFERENCECLK="12.000000")         1
+                              TOTAL         2
+----------------------------------------------------------------------
+Report for cell pll_1_ipgen_lscc_pll(DIVR="0",DIVF="66",DIVQ="5",FILTER_RANGE="1",PLLOUT_SELECT_PORTA="GENCLK",PLLOUT_SELECT_PORTB="GENCLK",FREQUENCY_PIN_REFERENCECLK="12.000000").v1
+Instance Path : pll.lscc_pll_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                              PLL_B         1          100.0
+                              TOTAL         1
+----------------------------------------------------------------------
+Report for cell controller.v1
+Instance Path : control
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                                FA2         8            8.1
+                            FD1P3XZ        34            7.3
+                         HSOSC_CORE         1          100.0
+                              IOL_B         1          100.0
+                               LUT4        36            3.8
+SUB MODULES
+                            counter         1
+                              TOTAL        81
+----------------------------------------------------------------------
+Report for cell counter.v1
+Instance Path : control.counter_inst
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                                FA2         8            8.1
+                            FD1P3XZ        14            3.0
+                              TOTAL        22
